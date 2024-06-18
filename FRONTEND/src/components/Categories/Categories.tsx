@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import Category from '../../types/Categories.types';
 import axios from 'axios';
+import './Categories.css'; // Importe o arquivo de estilos
+import CategoryItem from '../CategoryItem/CategoryItem'; // Importe o componente CategoryItem
+import Category from '../../types/Categories.types';
 
 const Categories = () => {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -20,15 +22,13 @@ const Categories = () => {
   }, []);
 
   return (
-    <div className='h-full w-full flex justify-center'>
-      <div className='h-full w-desktop grid grid-cols-3 gap-5 p-8'>
-        {categories.map((category) => {
-          return (
-            <main key={category.id}>
-              {/* Adicione o conteúdo da categoria aqui */}
-            </main>
-          );
-        })}
+    <div className='categories-container'>
+      <div className='categories-content'>
+        {categories.map((category) =>(
+          <div>
+            <CategoryItem category={category} />
+          </div>
+        ))}
       </div>
     </div>
   );

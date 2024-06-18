@@ -4,10 +4,10 @@ import Categories from '../../components/Categories/Categories'
 
 const Home = () => {
   return (
-    <div>
+    <>
         <Header/>
         <Categories />
-    </div>
+    </>
   )
 }
 

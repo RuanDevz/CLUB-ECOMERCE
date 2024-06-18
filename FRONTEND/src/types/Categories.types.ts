@@ -1,8 +1,8 @@
 interface Category {
     id: string,
     name: string,
-    displayName: string,
-    ImageUrl: string
+    displayname: string,
+    imageUrl: string
 
 }
 

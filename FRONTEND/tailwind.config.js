@@ -10,11 +10,12 @@ export default {
         primary: 'Poppins, sans-serif'
       },
       backgroundColor:{
-        header: '#212529'
+        header: '#212529',
+        opacity: '#73767a'
       },
       width:{
         desktop: '1920px'
-      }
+      },
     },
   },
   plugins: [],
