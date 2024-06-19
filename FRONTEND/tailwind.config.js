@@ -23,8 +23,15 @@ export default {
         hoverbutton: '#3B3D3F'
       },
       width:{
-        desktop: '1920px'
+        desktop: '1920px',
+        productwidth: '300px',
       },
+      height:{
+       productheight: '414px'
+      },
+      maxWidth:{
+        default: '1440px'
+      }
     },
   },
   plugins: [],

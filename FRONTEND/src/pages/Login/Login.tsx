@@ -4,6 +4,7 @@ import { FaGoogle } from "react-icons/fa";
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import { FaArrowRightToBracket } from "react-icons/fa6";
+import Title from '../../components/Title/Title'
 
 
 
@@ -12,7 +13,7 @@ const Login = () => {
     <div>
       <Header/>
       <div className='flex justify-center items-center flex-col mt-24'>
-        <h1 className='text-dark  text-2xl py-10 font-primary font-extrabold'>Entre com sua conta </h1>
+        <Title>Entre com sua conta</Title>
         <Button className='flex items-center justify-center gap-5 bg-dark text-light  rounded-lg py-3 px-4 text-base font-bold w-96 hover:bg-hoverbutton'>
             <FaGoogle/> Entrar com o Google
         </Button>
@@ -20,7 +21,7 @@ const Login = () => {
         <form className='flex  flex-col gap-10 mt-10 w-96' action="">
             <Input label='E-mail' type='text' placeholder='Digite seu e-mail'/>
             <Input label='Senha' type='password' placeholder='Digite sua senha'/>
-            <Button className='flex items-center justify-center gap-5 bg-dark text-light  rounded-lg py-3 px-4 text-base font-bold w-96 hover:bg-hoverbutton'>
+            <Button>
                 <FaArrowRightToBracket/>
                 Entrar
             </Button>
