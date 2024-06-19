@@ -1,0 +1,30 @@
+input {
+    border: none;
+    width: 100%;
+    background-color: #e9ecef;
+    padding: 10px 20px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    color: var(--text-dark);
+}
+
+input.has-error {
+    border: 2px solid var(--error);
+}
+
+input::placeholder {
+    color: #6c7570;
+    
+}
+
+input.has-error::placeholder {
+    color: #FF6A6A;
+}
+
+input:focus {
+    outline: 2px solid #6c7570;
+}
+
+input.has-error:focus {
+    outline: none;
+}
