@@ -8,6 +8,7 @@ const app = express();
 
 const productsRouter = require('./routes/products');
 const categoriesRouter = require('./routes/categories')
+const userRouter = require('./routes/user')
 
 app.use(express.json());
 app.use(cors());
@@ -18,6 +19,7 @@ const pool = new Pool({
 
 app.use('/products', productsRouter);
 app.use('/categories', categoriesRouter)
+app.use('/auth', userRouter)
 
 db.sequelize.authenticate()
     .then(() => {
