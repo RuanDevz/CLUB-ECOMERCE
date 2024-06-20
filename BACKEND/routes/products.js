@@ -12,6 +12,20 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.post('/', async (req, res) => {
+    const {name, price, url} = req.body
+    try {
+        const createproduct = await Product.create({
+            name,
+            price,
+            url
+        });
+        res.status(201).json(createproduct);
+    } catch (error) {
+        res.status(500).json({ error: 'Error create product' });
+    }
+});
+
 router.get('/jackets', async (req, res) => {
     try {
         const jackets = await Product.findAll({ where: { category: 'jackets' } });
