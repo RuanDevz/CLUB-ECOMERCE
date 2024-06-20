@@ -15,7 +15,7 @@ const CategoryItem: FunctionComponent<CategoryItemProps> = ({ category }) => {
   return (
     <div
       className="category-item-container font-primary"
-      style={{ backgroundImage: `url('${category.imageUrl}')` }}>
+      style={{ backgroundImage: `url('${category.imageUrl}')`}}>
         <Link to={`/${category.name}`}>
         <div className="category-name">
         <p>{category.displayname}</p>

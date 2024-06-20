@@ -6,26 +6,12 @@ require('dotenv').config();
 
 const app = express();
 
-const session = require('express-session');
-const passport = require('./config/passport-setup'); // Importe o passport-setup
-
 const productsRouter = require('./routes/products');
 const categoriesRouter = require('./routes/categories');
 const userRouter = require('./routes/user');
 
 app.use(express.json());
 app.use(cors());
-
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-  })
-);
-
-app.use(passport.initialize());
-app.use(passport.session());
 
 app.use('/products', productsRouter);
 app.use('/categories', categoriesRouter);
@@ -45,5 +31,3 @@ db.sequelize.authenticate()
   .catch(err => {
     console.error('Erro ao conectar ao banco de dados:', err);
   });
-
-  module.exports = passport

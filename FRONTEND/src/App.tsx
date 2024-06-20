@@ -11,6 +11,7 @@ import Feminino from './pages/CategoryProducts/female/female'
 import Masculino from './pages/CategoryProducts/male/male'
 import Tenis from './pages/CategoryProducts/sneakers/sneakers'
 import Context from '../src/Context/Context'
+import DashboardLogged from './components/DashboardLogged/DashboardLogged'
 
 const App: FC = () => {
 
@@ -19,12 +20,14 @@ const App: FC = () => {
   const [value, setValue] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [msgsuccess, setMsgsuccess] = useState<string>('')
+  const [accessToken, setAccessToken] = useState<string>('');
 
   return (
     <Context.Provider value={{
       value, setValue,
       error, setError,
-      msgsuccess, setMsgsuccess
+      msgsuccess, setMsgsuccess,
+      accessToken, setAccessToken
     }}>
     <Router>
       <Routes>
@@ -37,6 +40,7 @@ const App: FC = () => {
         <Route path='/jackets' element={<Jaquetas/>}/>
         <Route path='/male' element={<Masculino/>}/>
         <Route path='/female' element={<Feminino/>}/>
+        <Route path='/dashboard' element={<DashboardLogged/>}/>
       </Routes>
     </Router>
     </Context.Provider>

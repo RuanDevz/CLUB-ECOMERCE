@@ -7,7 +7,9 @@ interface ContextType {
     error: string;
     setError: Dispatch<SetStateAction<string>>;
     msgsuccess: string,
-    setMsgsuccess: Dispatch<SetStateAction<string>>
+    setMsgsuccess: Dispatch<SetStateAction<string>>,
+    accessToken: string,
+    setAccessToken: Dispatch<SetStateAction<string>>,
   }
   
   export default ContextType;

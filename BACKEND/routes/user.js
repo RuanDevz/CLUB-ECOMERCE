@@ -5,7 +5,6 @@ const bcrypt = require('bcrypt')
 const {sign} = require('jsonwebtoken')
 const Authmiddleware = require('../Middleware/Auth')
 const dotenv = require('dotenv')
-
 dotenv.config()
 
 
@@ -58,7 +57,6 @@ router.get('/dashboard', Authmiddleware, async (req, res) => {
         res.status(500).json({ error: "Erro interno do servidor" })
     }
 });
-
 
 
 

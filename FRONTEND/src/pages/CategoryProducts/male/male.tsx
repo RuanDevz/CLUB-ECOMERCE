@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Header from '../../../components/Header/Header'
 import Backpage from '../../Backpage/Backpage'
 import productsProps from '../../../types/Product.types'
 import axios from 'axios'
+import HeaderLogged from '../../../components/HeaderLogged/HeaderLogged'
+import Context from '../../../Context/Context'
 
 const Male = () => {
 
   const [male, setMale] = useState<productsProps[]>([])
 
+  const {accessToken} = useContext(Context)
 
   useEffect(() =>{
     axios.get(`${import.meta.env.VITE_API_URL}/products/male`)
@@ -18,7 +21,7 @@ const Male = () => {
 
   return (
     <div>
-    <Header/>
+    {accessToken ? <HeaderLogged/> : <Header/>}
     <main>
       <Backpage>Explorar Feminino</Backpage>
     <section className='max-w-default flex justify-around items-center gap-10 flex-wrap mx-auto'>

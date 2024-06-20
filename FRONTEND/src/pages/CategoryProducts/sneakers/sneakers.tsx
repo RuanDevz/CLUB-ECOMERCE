@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Header from '../../../components/Header/Header'
 import Backpage from '../../Backpage/Backpage'
 import productsProps from '../../../types/Product.types'
 import axios from 'axios'
+import Context from '../../../Context/Context'
+import HeaderLogged from '../../../components/HeaderLogged/HeaderLogged'
 
 const Sneakers = () => {
 
   const [sneakers, setSneakers] = useState<productsProps[]>([])
+  const {accessToken} = useContext(Context)
 
 
   useEffect(() =>{
@@ -18,7 +21,7 @@ const Sneakers = () => {
 
   return (
     <div>
-    <Header/>
+      {accessToken ? <HeaderLogged/> : <Header/>}
     <main>
       <Backpage>Explorar Tênis</Backpage>
     <section className='max-w-default flex justify-around items-center gap-10 flex-wrap mx-auto'>

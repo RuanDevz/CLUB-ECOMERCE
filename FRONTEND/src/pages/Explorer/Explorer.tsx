@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Header from '../../components/Header/Header'
 import axios from 'axios'
 import productsProps from '../../types/Product.types';
 import Backpage from '../Backpage/Backpage';
+import HeaderLogged from '../../components/HeaderLogged/HeaderLogged';
+import Context from '../../Context/Context';
 
 
 const Explorer = () => {
 
   const [products, setProducts] = useState<productsProps[]>([])
+
+  const {accessToken}  = useContext(Context)
 
 
   useEffect(() =>{
@@ -19,7 +23,7 @@ const Explorer = () => {
 
   return (
     <div>
-      <Header/>
+      {accessToken ? <HeaderLogged/> : <Header/>}
       <main>
         <Backpage>Explorer</Backpage>
       <section className='max-w-default flex justify-around items-center gap-10 flex-wrap mx-auto'>

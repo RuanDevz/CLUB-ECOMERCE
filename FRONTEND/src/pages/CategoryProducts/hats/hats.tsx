@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import axios from 'axios'
 import productsProps from '../../../types/Product.types'
 import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
@@ -6,10 +6,14 @@ import Title from '../../../components/Title/Title';
 import Header from '../../../components/Header/Header';
 import {Link} from 'react-router-dom'
 import Backpage from '../../Backpage/Backpage';
+import Context from '../../../Context/Context';
+import HeaderLogged from '../../../components/HeaderLogged/HeaderLogged';
 
-const hats = () => {
+const Hats = () => {
 
     const [hats, setHats] = useState<productsProps[]>([])
+
+    const userlogged = sessionStorage.getItem('token')
 
 
     useEffect(() =>{
@@ -22,7 +26,7 @@ const hats = () => {
 
   return (
     <div>
-    <Header/>
+    {userlogged ? <HeaderLogged/> : <Header/>}
     <main>
       <Backpage>Explorar Chapéus</Backpage>
     <section className='max-w-default flex justify-around items-center gap-10 flex-wrap mx-auto'>
@@ -41,4 +45,4 @@ const hats = () => {
   )
 }
 
-export default hats
+export default Hats
