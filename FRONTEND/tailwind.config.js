@@ -13,7 +13,8 @@ export default {
         light: '#f8f9fa',
         dark: '#212529',
         placeholder: '#6c7570',
-        error: '#FF6A6A'
+        error: '#FF6A6A',
+        success: '#6AFF6A'
       },
       backgroundColor:{
         backgroundinput: '#E9ECEF',
