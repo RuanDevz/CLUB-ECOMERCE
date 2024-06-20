@@ -40,7 +40,7 @@ const Login = () => {
       try {
         const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, configlogin);
         setAccessToken(response.data.token);
-        console.log(response.data.token)
+        console.log(response.data.token);
         navigate('/');
       } catch (err) {
         setError('Credenciais inválidas');
@@ -75,13 +75,13 @@ const Login = () => {
           <FaGoogle /> Entrar com o Google
         </Button>
         <p className='text-base text-center pb-6 font-medium text-dark mt-5 border-b-2 w-96 border-dark'>Ou entre com o seu e-mail</p>
-        <form className='flex  flex-col gap-10 mt-10 w-96' action=''>
+        <form className='flex flex-col gap-10 mt-10 w-96' onSubmit={handlelogin}>
           <Input onChange={(e) => setEmail(e.target.value)} label='E-mail' type='text' placeholder='Digite seu e-mail' />
           <Input onChange={(e) => setPassword(e.target.value)} label='Senha' type='password' placeholder='Digite sua senha' />
           <div className='flex justify-center items-center'>
             <Error />
           </div>
-          <Button onClick={(e) => handlelogin(e)}>
+          <Button type='submit'>
             <FaArrowRightToBracket />
             Entrar
           </Button>

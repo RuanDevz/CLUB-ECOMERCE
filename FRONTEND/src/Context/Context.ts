@@ -1,4 +1,5 @@
-import { createContext, Dispatch, SetStateAction } from "react";
+// src/Context/Context.ts
+import { createContext} from "react";
 import ContextType from "../types/ContextType";
 
 const Context = createContext<ContextType>({
@@ -7,7 +8,9 @@ const Context = createContext<ContextType>({
   error: "",
   setError: () => {},
   msgsuccess: "",
-  setMsgsuccess: () => {}
+  setMsgsuccess: () => {},
+  accessToken: "",
+  setAccessToken: () => {}
 });
 
 export default Context;
