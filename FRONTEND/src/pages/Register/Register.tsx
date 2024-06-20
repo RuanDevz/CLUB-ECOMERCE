@@ -21,7 +21,7 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [confirmpassword, setConfirmpassword] = useState('');
 
-  const { error, setError, msgSuccess, setMsgsuccess } = useContext(Context);
+  const { error, setError, msgsuccess, setMsgsuccess } = useContext(Context);
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -60,7 +60,7 @@ const Register = () => {
   return (
     <div>
       <Header />
-      <main className='flex justify-center items-center flex-col mt-10'>
+      <main className='flex justify-center items-center flex-col mt-1'>
         <Title className='border-b border-dark'>Crie a sua conta</Title>
         <form className='mt-16 flex flex-col gap-5 w-96' onSubmit={(e) => e.preventDefault()}>
           <Input onChange={(e) => setNome(e.target.value)} label='Nome' type='text' placeholder='Digite seu nome' />
@@ -74,7 +74,7 @@ const Register = () => {
           <Input onChange={(e) => setConfirmpassword(e.target.value)} label='Confirmação de Senha' type='password' placeholder='Confirme sua senha' />
             <div className='flex justify-center items-center'>
               <Error>{error}</Error>
-              <Msgsuccess>{msgSuccess}</Msgsuccess>
+              <Msgsuccess>{msgsuccess}</Msgsuccess>
             </div>
         </form>
         <Button onClick={handleClick} className='flex items-center mt-7'>

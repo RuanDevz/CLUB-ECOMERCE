@@ -28,3 +28,18 @@ input:focus {
 input.has-error:focus {
     outline: none;
 }
+
+/* input.css */
+  
+  .text-dark {
+    color: #343a40;
+  }
+  
+  .border-error {
+    border-color: #FF6A6A;
+  }
+  
+  .placeholder-error::placeholder {
+    color: #FF6A6A;
+  }
+  
