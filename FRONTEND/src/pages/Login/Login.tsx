@@ -51,8 +51,10 @@ const Login = () => {
 
   const login = useGoogleLogin({
     onSuccess: (tokenResponse) => {
-      console.log(tokenResponse);
+      console.log(tokenResponse.access_token);
       setAccessToken(tokenResponse.access_token);
+      const googletoken = accessToken
+      sessionStorage.setItem('Googletoken', googletoken)
       navigate('/');
     },
     onError: (errorResponse) => {
