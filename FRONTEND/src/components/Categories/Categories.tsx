@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Categories.css'; // Importe o arquivo de estilos
-import CategoryItem from '../CategoryItem/CategoryItem'; // Importe o componente CategoryItem
+import './Categories.css'; 
+import CategoryItem from '../CategoryItem/CategoryItem'; 
 import Category from '../../types/Categories.types';
 
 const Categories = () => {

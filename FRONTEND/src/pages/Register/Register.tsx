@@ -9,6 +9,7 @@ import Context from '../../Context/Context';
 import Error from '../../components/Error/Error';
 import { useNavigate } from 'react-router-dom';
 import Msgsuccess from '../../components/Msgsuccess/Msgsuccess';
+import { CircularProgress } from '@nextui-org/react';
 
 const Register = () => {
 
@@ -20,6 +21,7 @@ const Register = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmpassword, setConfirmpassword] = useState('');
+  const [circularloading, setCircularloading] = useState<boolean>(false)
 
   const { error, setError, msgsuccess, setMsgsuccess } = useContext(Context);
 
@@ -45,14 +47,18 @@ const Register = () => {
     } else {
       setError('');
       try {
+        setCircularloading(true)
         await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, configRegister);
         setMsgsuccess('Usuario criado!')
         setTimeout(() => {
           navigate('/login')
         }, 2000);
+        setCircularloading(false)
       } catch (error) {
         setError('Email já cadastrado!');
         console.error(error);
+      }finally{
+        setCircularloading(false)
       }
     }
   };
@@ -78,8 +84,7 @@ const Register = () => {
             </div>
         </form>
         <Button onClick={handleClick} className='flex items-center mt-7'>
-          <FaArrowRightToBracket />
-          Criar Conta
+          {circularloading ? <CircularProgress /> : <><FaArrowRightToBracket />Criar Conta</>}
         </Button>
       </main>
     </div>

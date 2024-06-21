@@ -3,6 +3,12 @@ import { IoCartOutline } from "react-icons/io5";
 import { Link } from 'react-router-dom';
 
 
+const exit = () =>{
+  sessionStorage.removeItem('token')
+  sessionStorage.removeItem('Googletoken')
+  window.location.reload()
+}
+
 
 const HeaderLogged = () => {
   return (
@@ -12,6 +18,9 @@ const HeaderLogged = () => {
         <nav>
           <ul className='flex items-center justify-around gap-20 mr-14'>
             <Link to='/explorer'><li className='font-medium text-xl text-white'>Explorer</li></Link>
+            <div onClick={exit}>
+              <li className='font-medium text-xl text-white cursor-pointer'>Sair</li>
+            </div>
             <div className='flex'>
             <li className='font-medium text-2xl text-white'><IoCartOutline/></li>
             <span className='text-white text-base ml-3'>1</span>

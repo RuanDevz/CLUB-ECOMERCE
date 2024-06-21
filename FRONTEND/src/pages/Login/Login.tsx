@@ -10,6 +10,7 @@ import axios from 'axios';
 import { useGoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
 import Error from '../../components/Error/Error';
+import {CircularProgress} from "@nextui-org/react";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ const Login = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const [circularloading, setCircularloading] = useState<boolean>(false)
 
   const { setMsgsuccess, setError, accessToken, setAccessToken } = useContext(Context);
 
@@ -38,14 +40,18 @@ const Login = () => {
     } else {
       setError('');
       try {
+        setCircularloading(true)
         const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, configlogin);
         const token = response.data.token;
         setAccessToken(token);
         sessionStorage.setItem('token', token);
         navigate('/');
+        setCircularloading(false)
       } catch (err) {
         setError('Credenciais inválidas');
         console.log(err);
+      }finally{
+        setCircularloading(false)
       }
     }
   };
@@ -85,8 +91,7 @@ const Login = () => {
             <Error />
           </div>
           <Button type='submit'>
-            <FaArrowRightToBracket />
-            Entrar
+             {circularloading ? <CircularProgress /> : <>Entrar <FaArrowRightToBracket /></>}
           </Button>
         </form>
       </div>

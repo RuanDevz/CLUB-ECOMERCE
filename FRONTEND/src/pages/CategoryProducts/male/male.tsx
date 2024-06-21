@@ -5,6 +5,7 @@ import productsProps from '../../../types/Product.types'
 import axios from 'axios'
 import HeaderLogged from '../../../components/HeaderLogged/HeaderLogged'
 import Context from '../../../Context/Context'
+import ImageProduct from '../../../components/ImageProduct/ImageProduct'
 
 const Male = () => {
 
@@ -27,7 +28,7 @@ const Male = () => {
     <section className='max-w-default flex justify-around items-center gap-10 flex-wrap mx-auto'>
       {male.map((man) =>(
         <div key={man.id}>
-          <img className='w-productwidth h-productheight rounded-xl font-primary' src={man.imageUrl} alt={man.name} />
+          <ImageProduct src={man.imageUrl} alt={man.name} />
           <div className='flex justify-between py-2'>
             <p className='font-medium text-base text-center'>{man.name}</p>
             <p className='font-medium text-base text-center'>R${man.price}</p>
