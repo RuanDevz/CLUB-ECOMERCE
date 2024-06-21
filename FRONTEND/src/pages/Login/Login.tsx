@@ -50,7 +50,6 @@ const Login = () => {
     }
   };
 
-  //DEPLOT
 
   const login = useGoogleLogin({
     onSuccess: (tokenResponse) => {
