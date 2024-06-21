@@ -32,6 +32,7 @@ export default {
       width:{
         desktop: '1920px',
         productwidth: '300px',
+        buttonwidth: '270px'
       },
       height:{
        productheight: '414px'
