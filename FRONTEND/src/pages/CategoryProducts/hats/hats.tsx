@@ -14,6 +14,7 @@ const Hats = () => {
     const [hats, setHats] = useState<productsProps[]>([])
 
     const userlogged = sessionStorage.getItem('token')
+    const GoogleLogged = sessionStorage.getItem('Googletoken')
 
 
     useEffect(() =>{
@@ -26,7 +27,7 @@ const Hats = () => {
 
   return (
     <div>
-    {userlogged ? <HeaderLogged/> : <Header/>}
+    {userlogged || GoogleLogged ? <HeaderLogged/> : <Header/>}
     <main>
       <Backpage>Explorar Chapéus</Backpage>
     <section className='max-w-default flex justify-around items-center gap-10 flex-wrap mx-auto'>

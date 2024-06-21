@@ -9,7 +9,9 @@ import HeaderLogged from '../../../components/HeaderLogged/HeaderLogged'
 const Sneakers = () => {
 
   const [sneakers, setSneakers] = useState<productsProps[]>([])
-  const {accessToken} = useContext(Context)
+  
+  const userlogged = sessionStorage.getItem('token')
+  const GoogleLogged = sessionStorage.getItem('Googletoken')
 
 
   useEffect(() =>{
@@ -21,7 +23,7 @@ const Sneakers = () => {
 
   return (
     <div>
-      {accessToken ? <HeaderLogged/> : <Header/>}
+      {userlogged || GoogleLogged ? <HeaderLogged/> : <Header/>}
     <main>
       <Backpage>Explorar Tênis</Backpage>
     <section className='max-w-default flex justify-around items-center gap-10 flex-wrap mx-auto'>

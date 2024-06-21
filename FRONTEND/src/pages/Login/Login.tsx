@@ -39,8 +39,9 @@ const Login = () => {
       setError('');
       try {
         const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, configlogin);
-        setAccessToken(response.data.token);
-        console.log(response.data.token);
+        const token = response.data.token;
+        setAccessToken(token);
+        sessionStorage.setItem('token', token);
         navigate('/');
       } catch (err) {
         setError('Credenciais inválidas');
@@ -51,10 +52,9 @@ const Login = () => {
 
   const login = useGoogleLogin({
     onSuccess: (tokenResponse) => {
-      console.log(tokenResponse.access_token);
-      setAccessToken(tokenResponse.access_token);
-      const googletoken = accessToken
-      sessionStorage.setItem('Googletoken', googletoken)
+      const token = tokenResponse.access_token;
+      setAccessToken(token);
+      sessionStorage.setItem('Googletoken', token);
       navigate('/');
     },
     onError: (errorResponse) => {
@@ -73,7 +73,7 @@ const Login = () => {
       <Header />
       <div className='flex justify-center items-center flex-col mt-24'>
         <Title>Entre com sua conta</Title>
-        <Button onClick={() => login()} className='flex items-center justify-center gap-5 bg-dark text-light  rounded-lg py-3 px-4 text-base font-bold w-96 hover:bg-hoverbutton'>
+        <Button onClick={() => login()} className='flex items-center justify-center gap-5 bg-dark text-light rounded-lg py-3 px-4 text-base font-bold w-96 hover:bg-hoverbutton'>
           <FaGoogle /> Entrar com o Google
         </Button>
         <p className='text-base text-center pb-6 font-medium text-dark mt-5 border-b-2 w-96 border-dark'>Ou entre com o seu e-mail</p>

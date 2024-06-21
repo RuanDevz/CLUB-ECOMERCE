@@ -11,6 +11,7 @@ const Female = () => {
   const [female, setFemale] = useState<productsProps[]>([])
 
   const userlogged = sessionStorage.getItem('token')
+  const Googlelogged = sessionStorage.getItem('Googletoken')
   console.log(userlogged)
 
 
@@ -24,7 +25,7 @@ const Female = () => {
 
   return (
     <div>
-    {userlogged ? <HeaderLogged/> : <Header/>}
+    {userlogged || Googlelogged ? <HeaderLogged/> : <Header/>}
     <main>
       <Backpage>Explorar Feminino</Backpage>
     <section className='max-w-default flex justify-around items-center gap-10 flex-wrap mx-auto'>

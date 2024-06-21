@@ -6,7 +6,7 @@ import HeaderLogged from '../../components/HeaderLogged/HeaderLogged';
 
 const Home = () => {
 
-  const userlogged = sessionStorage.getItem('token')
+  const userlogged = sessionStorage.getItem('token') || sessionStorage.getItem('Googletoken');
 
   return (
     <>

@@ -11,7 +11,8 @@ const Jackets = () => {
 
   const [jackets, setJackets] = useState<productsProps[]>([])
 
-  const {accessToken} = useContext(Context)
+  const Googlelogged = sessionStorage.getItem('Googletoken')
+  const userlogged = sessionStorage.getItem('token')
 
 
   useEffect(() =>{
@@ -23,7 +24,7 @@ const Jackets = () => {
 
   return (
     <div>
-    {accessToken ? <HeaderLogged/> : <Header/>}
+    {userlogged || Googlelogged ? <HeaderLogged/> : <Header/>}
     <main>
       <Backpage>Explorar Jaquetas</Backpage>
     <section className='max-w-default flex justify-around items-center gap-10 flex-wrap mx-auto'>
