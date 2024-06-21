@@ -9,7 +9,7 @@ router.get('/', async (req,res) =>{
     const getallcategories = await Categories.findAll()
     res.json(getallcategories)
 })
-
+// get
 router.post('/', async (req, res) =>{
     const mycategories = req.body
     const createcategories = await Categories.create(mycategories)
