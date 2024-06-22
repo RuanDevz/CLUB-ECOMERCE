@@ -6,7 +6,7 @@ import Menubar from '../../components/Menubar/Menubar'
 const Header = () => {
   return (
     <div className="bg-dark py-3 ">
-         <Link to="/"><Menubar/></Link>
+         <Menubar/>
     </div>
   );
 };

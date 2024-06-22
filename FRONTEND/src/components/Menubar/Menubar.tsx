@@ -29,23 +29,14 @@ export default function App() {
       <Navbar className="bg-dark">
         <NavbarContent>
           <NavbarMenuToggle
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             className="sm:hidden text-white bg-dark z-30"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           />
           <NavbarBrand>
-            <AcmeLogo />
-            <p className="text-xl font-bold lg:text-2xl text-inherit text-white">CLUB CLOTHING</p>
+           <Link href='#/'> <AcmeLogo />
+           <p className="text-xl font-bold lg:text-2xl text-inherit text-white">CLUB CLOTHING</p></Link>
           </NavbarBrand>
-        </NavbarContent>
-
-        <NavbarContent className="hidden sm:flex gap-8 justify-center">
-          {menuItems.map((item, index) => (
-            <NavbarItem key={index}>
-              <Link color="primary" href={`#${item.route}`}>
-                {item.label}
-              </Link>
-            </NavbarItem>
-          ))}
         </NavbarContent>
 
         <NavbarContent justify="end">

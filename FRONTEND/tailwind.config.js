@@ -27,7 +27,8 @@ export default {
         light: '#f8f9fa',
         opacity: '#73767a',
         hoverbutton: '#3B3D3F',
-        visible: '#000000'
+        visible: '#000000',
+        cartbg: 'rgba(0, 0, 0, 0.7)'
       },
       width:{
         desktop: '1920px',
@@ -40,7 +41,7 @@ export default {
       },
       maxWidth:{
         default: '1620px'
-      }
+      },
     },
     
   },

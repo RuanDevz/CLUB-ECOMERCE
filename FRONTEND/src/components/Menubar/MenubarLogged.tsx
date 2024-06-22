@@ -1,9 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Button } from "@nextui-org/react";
+import { FaCartShopping } from "react-icons/fa6";
+
 import { AcmeLogo } from "./AcmeLogo.jsx";
+import Cart from "../Cart/Cart.jsx";
+
 
 export default function App() {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false)
+
+  const [showcartitem, setShowcartitem] = useState(false)
+
+  const handlecartitem = () =>{
+    setShowcartitem(!showcartitem)
+  }
 
   const menuItems = [
     { label: "Explorer", route: "/explorer" },
@@ -22,20 +32,27 @@ export default function App() {
   }
 
   return (
-    <div>
-      <Navbar className="bg-dark " onMenuOpenChange={setIsMenuOpen}>
+    <div className="flex justify-end items-center relative">
+          <FaCartShopping onClick={handlecartitem} className="text-white z-50 text-xl lg:text-2xl absolute mr-10 cursor-pointer"/>
+      <Navbar className="bg-dark py-3" onMenuOpenChange={setIsMenuOpen}>
+      <div className="absolute right-0">
+      </div>
         <NavbarContent>
           <NavbarMenuToggle
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             className="sm:hidden text-white bg-dark"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            
           />
           <NavbarBrand>
-            <AcmeLogo />
-            <p className="text-xl font-bold lg:text-2xl text-inherit text-white">CLUB CLOTHING</p>
+            <Link href="#/"><AcmeLogo />
+            <p className="text-xl font-bold lg:text-2xl text-inherit text-white">CLUB CLOTHING</p></Link>
           </NavbarBrand>
         </NavbarContent>
+        {showcartitem && <Cart />}
+        
 
-        <NavbarContent className="hidden sm:flex gap-8 justify-center">
+        <NavbarContent justify="end" className="hidden sm:flex gap-8 justify-center">
           {menuItems.map((item, index) => (
             <NavbarItem key={index}>
               {item.route ? (
