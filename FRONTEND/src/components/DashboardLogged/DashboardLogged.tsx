@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import HeaderLogged from '../HeaderLogged/HeaderLogged'
+import Menubar from '../Menubar/Menubar'
 import Categories from '../Categories/Categories'
 import Context from '../../Context/Context'
 
@@ -9,7 +9,7 @@ const DashboardLogged = () => {
 
   return (
     <>
-        <HeaderLogged/>
+        <Menubar/>
         <Categories/>
     </>
   )

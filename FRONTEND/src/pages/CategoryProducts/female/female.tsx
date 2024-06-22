@@ -4,7 +4,7 @@ import Backpage from '../../Backpage/Backpage'
 import productsProps from '../../../types/Product.types'
 import axios from 'axios'
 import Context from '../../../Context/Context'
-import HeaderLogged from '../../../components/HeaderLogged/HeaderLogged'
+import MenubarLogged from '../../../components/Menubar/MenubarLogged'
 import ImageProduct from '../../../components/ImageProduct/ImageProduct'
 import Spacer from '../../../components/Spacer/Spacer'
 
@@ -32,10 +32,10 @@ const Female = () => {
 
   return (
     <div>
-    {userlogged || Googlelogged ? <HeaderLogged/> : <Header/>}
+    {userlogged || Googlelogged ? <MenubarLogged/> : <Header/>}
     <main>
       <Backpage>Explorar Feminino</Backpage>
-    <section className='max-w-default flex justify-between items-center gap-10 flex-wrap mx-auto'>
+    <section className='max-w-default flex justify-around items-center gap-10 flex-wrap mx-auto'>
       {loading ? (
         <Spacer/>
       ):(

@@ -3,7 +3,7 @@ import Header from '../../components/Header/Header'
 import axios from 'axios'
 import productsProps from '../../types/Product.types';
 import Backpage from '../Backpage/Backpage';
-import HeaderLogged from '../../components/HeaderLogged/HeaderLogged';
+import MenubarLogged from '../../components/Menubar/MenubarLogged';
 import Spacer from '../../components/Spacer/Spacer';
 
 
@@ -28,7 +28,7 @@ const Explorer = () => {
 
   return (
     <div>
-      {userlogged || Googlelogged  ? <HeaderLogged/> : <Header/>}
+      {userlogged || Googlelogged  ? <MenubarLogged/> : <Header/>}
       <main>
         <Backpage>Explorer</Backpage>
       <section className='max-w-default flex justify-around items-center gap-10 flex-wrap mx-auto'>

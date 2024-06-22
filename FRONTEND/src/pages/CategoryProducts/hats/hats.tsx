@@ -4,7 +4,7 @@ import productsProps from '../../../types/Product.types'
 import Header from '../../../components/Header/Header';
 import Backpage from '../../Backpage/Backpage';
 import Context from '../../../Context/Context';
-import HeaderLogged from '../../../components/HeaderLogged/HeaderLogged';
+import MenubarLogged from '../../../components/Menubar/MenubarLogged';
 import ImageProduct from '../../../components/ImageProduct/ImageProduct';
 import Spacer from '../../../components/Spacer/Spacer'
 
@@ -30,7 +30,7 @@ const Hats = () => {
 
   return (
     <div>
-    {userlogged || GoogleLogged ? <HeaderLogged/> : <Header/>}
+    {userlogged || GoogleLogged ? <MenubarLogged/> : <Header/>}
     <main>
       <Backpage>Explorar Chapéus</Backpage>
     <section className='max-w-default flex justify-around items-center gap-10 flex-wrap mx-auto'>

@@ -78,19 +78,19 @@ const Login = () => {
   return (
     <div>
       <Header />
-      <div className='flex justify-center items-center flex-col mt-24'>
-        <Title>Entre com sua conta</Title>
-        <Button onClick={() => login()} className='flex items-center justify-center gap-5 bg-dark text-light rounded-lg py-3 px-4 text-base font-bold w-96 hover:bg-hoverbutton'>
+      <div className=' mt-0 lg:flex justify-center items-center flex-col lg:mt-24'>
+        <Title className='text-center'>Entre com sua conta</Title>
+        <Button onClick={() => login()} className='max-w-80 mx-auto lg:flex items-center justify-center gap-5 bg-dark text-light rounded-lg py-3 px-4 text-base font-bold lg:max-w-96 hover:bg-hoverbutton'>
           <FaGoogle /> Entrar com o Google
         </Button>
-        <p className='text-base text-center pb-6 font-medium text-dark mt-5 border-b-2 w-96 border-dark'>Ou entre com o seu e-mail</p>
-        <form className='flex flex-col gap-10 mt-10 w-96' onSubmit={handlelogin}>
+        <p className=' w-80 mx-auto lg:text-base text-center pb-6 font-medium text-dark mt-5 border-b-2 lg:w-96 border-dark'>Ou entre com o seu e-mail</p>
+        <form className='max-w-80 mx-auto lg:flex flex-col gap-10 mt-10 lg:max-w-96' onSubmit={handlelogin}>
           <Input onChange={(e) => setEmail(e.target.value)} label='E-mail' type='text' placeholder='Digite seu e-mail' />
           <Input onChange={(e) => setPassword(e.target.value)} label='Senha' type='password' placeholder='Digite sua senha' />
           <div className='flex justify-center items-center'>
             <Error />
           </div>
-          <Button type='submit'>
+          <Button className='max-w-80 lg:max-w-full mt-5 lg:mt-0' type='submit'>
              {circularloading ? <CircularProgress /> : <>Entrar <FaArrowRightToBracket /></>}
           </Button>
         </form>
