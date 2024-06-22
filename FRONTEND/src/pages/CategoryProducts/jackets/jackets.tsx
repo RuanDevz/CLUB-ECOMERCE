@@ -6,6 +6,7 @@ import axios from 'axios'
 import Context from '../../../Context/Context'
 import HeaderLogged from '../../../components/HeaderLogged/HeaderLogged'
 import ImageProduct from '../../../components/ImageProduct/ImageProduct'
+import Spacer from '../../../components/Spacer/Spacer'
 
 const Jackets = () => {
 
@@ -15,13 +16,17 @@ const Jackets = () => {
   const Googlelogged = sessionStorage.getItem('Googletoken')
   const userlogged = sessionStorage.getItem('token')
 
+  const [loading, setLoading] = useState<boolean>(false)
+
 
   useEffect(() =>{
-    axios.get(`${import.meta.env.VITE_API_URL}/products/jackets`)
+    setLoading(true)
+     axios.get(`${import.meta.env.VITE_API_URL}/products/jackets`)
     .then((response) =>{
       setJackets(response.data)
+      setLoading(false)
     })
-  })
+  },[])
 
   return (
     <div>
@@ -29,7 +34,11 @@ const Jackets = () => {
     <main>
       <Backpage>Explorar Jaquetas</Backpage>
     <section className='max-w-default flex justify-around items-center gap-10 flex-wrap mx-auto'>
-      {jackets.map((jacket) =>(
+      {loading ? (
+        <Spacer/>
+      ):(
+        <>
+        {jackets.map((jacket) =>(
         <div key={jacket.id}>
           <ImageProduct src={jacket.imageUrl} alt={jacket.name}/>
           <div className='flex justify-between py-2'>
@@ -37,7 +46,8 @@ const Jackets = () => {
             <p className='font-medium text-base text-center'>R${jacket.price}</p>
           </div>
         </div>
-      ))}
+      ))}</>
+      )}
     </section>
     </main>
   </div>

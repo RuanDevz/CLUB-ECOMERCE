@@ -17,7 +17,7 @@ const ImageProduct = ({ src, alt }: { src: string; alt: string }) => {
 
       {hovered && (
         <div className="absolute inset-0 flex items-center justify-center  rounded-lg transition-opacity duration-1000 opacity-100 group-hover:opacity-100 ">
-          <div className='z-50'>
+          <div className='z-30'>
             <Button className="text-white px-4 py-2 rounded-lg flex items-center w-buttonwidth mt-72 space-x-2 hover:bg-visible transition-colors duration-1000">
             <FaCartPlus />
             <span>Adicionar ao carrinho</span>

@@ -6,6 +6,7 @@ import axios from 'axios'
 import HeaderLogged from '../../../components/HeaderLogged/HeaderLogged'
 import Context from '../../../Context/Context'
 import ImageProduct from '../../../components/ImageProduct/ImageProduct'
+import Spacer from '../../../components/Spacer/Spacer'
 
 const Male = () => {
 
@@ -13,12 +14,16 @@ const Male = () => {
   const userlogged = sessionStorage.getItem('token')
   const Googlelogged = sessionStorage.getItem('Googletoken')
 
+  const [loading, setLoading] = useState<boolean>(false)
+
   useEffect(() =>{
+    setLoading(true)
     axios.get(`${import.meta.env.VITE_API_URL}/products/male`)
     .then((response) =>{
       setMale(response.data)
+      setLoading(false)
     })
-  })
+  },[])
 
   return (
     <div>
@@ -26,7 +31,11 @@ const Male = () => {
     <main>
       <Backpage>Explorar Feminino</Backpage>
     <section className='max-w-default flex justify-around items-center gap-10 flex-wrap mx-auto'>
-      {male.map((man) =>(
+      {loading ? (
+        <Spacer/>
+      ):(
+        <>
+        {male.map((man) =>(
         <div key={man.id}>
           <ImageProduct src={man.imageUrl} alt={man.name} />
           <div className='flex justify-between py-2'>
@@ -35,6 +44,8 @@ const Male = () => {
           </div>
         </div>
       ))}
+        </>
+      )}
     </section>
     </main>
   </div>

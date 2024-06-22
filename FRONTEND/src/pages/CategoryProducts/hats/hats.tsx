@@ -1,27 +1,29 @@
 import React, {useState, useEffect, useContext} from 'react'
 import axios from 'axios'
 import productsProps from '../../../types/Product.types'
-import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
-import Title from '../../../components/Title/Title';
 import Header from '../../../components/Header/Header';
-import {Link} from 'react-router-dom'
 import Backpage from '../../Backpage/Backpage';
 import Context from '../../../Context/Context';
 import HeaderLogged from '../../../components/HeaderLogged/HeaderLogged';
 import ImageProduct from '../../../components/ImageProduct/ImageProduct';
+import Spacer from '../../../components/Spacer/Spacer'
 
 const Hats = () => {
 
     const [hats, setHats] = useState<productsProps[]>([])
+
+    const [loading, setLoading] = useState<boolean>(false)
 
     const userlogged = sessionStorage.getItem('token')
     const GoogleLogged = sessionStorage.getItem('Googletoken')
 
 
     useEffect(() =>{
+      setLoading(true)
         axios.get(`${import.meta.env.VITE_API_URL}/products/hats`)
         .then((response) =>{
           setHats(response.data)
+          setLoading(false)
         })
       },[])
 
@@ -32,7 +34,11 @@ const Hats = () => {
     <main>
       <Backpage>Explorar Chapéus</Backpage>
     <section className='max-w-default flex justify-around items-center gap-10 flex-wrap mx-auto'>
-      {hats.map((hat) =>(
+      {loading ?(
+        <Spacer/>
+      ):(
+        <>
+        {hats.map((hat) =>(
         <div key={hat.id}>
           <ImageProduct src={hat.imageUrl} alt={hat.name}/>
           <div className='flex justify-between py-2'>
@@ -41,6 +47,8 @@ const Hats = () => {
           </div>
         </div>
       ))}
+        </>
+      )}
     </section>
     </main>
   </div>

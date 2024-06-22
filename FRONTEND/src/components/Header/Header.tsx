@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { IoCartOutline } from "react-icons/io5";
 import { Link } from 'react-router-dom';
+import Cartitem from '../Cartitem/Cartitem';
 
 
 
 const Header = () => {
+
+  const [showmodal, setShowmodal] = useState<boolean>(false)
+
+  const handleclick = () =>{
+    setShowmodal(!showmodal)
+  }
+
   return (
     <div>
       <header className='flex justify-between items-center py-5 bg-dark'>
@@ -14,7 +22,8 @@ const Header = () => {
             <Link to='/explorer'><li className='font-medium text-xl text-white'>Explorer</li></Link>
             <Link to='/login'><li className='font-medium text-xl text-white'>Login</li></Link>
             <Link to='/register'><li className='font-medium text-xl text-white'>Criar conta</li></Link>
-            <div className='flex'>
+            {showmodal && <Cartitem/>}
+            <div onClick={handleclick} className='flex'>
             <li className='font-medium text-2xl text-white'><IoCartOutline/></li>
             <span className='text-white text-base ml-3'>1</span>
             </div>
