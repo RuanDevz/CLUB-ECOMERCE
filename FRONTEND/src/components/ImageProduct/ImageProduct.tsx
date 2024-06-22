@@ -1,10 +1,15 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { FaCartPlus } from 'react-icons/fa';
-import Button from '../Button/Button'; // Importe seu componente de botão aqui
-import './styles.css'
+import Button from '../Button/Button';
+import './styles.css';
 
-const ImageProduct = ({ src, alt }: { src: string; alt: string }) => {
+interface ImageProductProps {
+  src: string;
+  alt: string;
+  add: () => void;
+}
+
+const ImageProduct: React.FC<ImageProductProps> = ({ src, alt, add }) => {
   const [hovered, setHovered] = useState(false);
 
   return (
@@ -16,12 +21,12 @@ const ImageProduct = ({ src, alt }: { src: string; alt: string }) => {
       <img src={src} alt={alt} className="w-productwidth h-96 rounded-lg shadow-md" />
 
       {hovered && (
-        <div className="absolute inset-0 flex items-center justify-center  rounded-lg transition-opacity duration-1000 opacity-100 group-hover:opacity-100 ">
+        <div className="absolute inset-0 flex items-center justify-center rounded-lg transition-opacity duration-1000 opacity-100 group-hover:opacity-100 ">
           <div className='z-30'>
-            <Button className="text-white px-4 py-2 rounded-lg flex items-center w-buttonwidth mt-72 space-x-2 hover:bg-visible transition-colors duration-1000">
-            <FaCartPlus />
-            <span>Adicionar ao carrinho</span>
-          </Button>
+            <Button onClick={add} className="text-white px-4 py-2 rounded-lg flex items-center w-buttonwidth mt-72 space-x-2 hover:bg-visible transition-colors duration-1000">
+              <FaCartPlus />
+              <span>Adicionar ao carrinho</span>
+            </Button>
           </div>
         </div>
       )}

@@ -5,6 +5,7 @@ import productsProps from '../../types/Product.types';
 import Backpage from '../Backpage/Backpage';
 import MenubarLogged from '../../components/Menubar/MenubarLogged';
 import Spacer from '../../components/Spacer/Spacer';
+import ImageProduct from '../../components/ImageProduct/ImageProduct';
 
 
 const Explorer = () => {
@@ -38,7 +39,7 @@ const Explorer = () => {
           <>
           {products.map((product) =>(
           <div key={product.id}>
-            <img className='w-productwidth h-productheight rounded-xl font-primary' src={product.imageUrl} alt={product.name} />
+            <ImageProduct src={product.imageUrl} alt={product.name}/>
             <div className='flex justify-between py-2'>
               <p className='font-medium text-base text-center'>{product.name}</p>
               <p className='font-medium text-base text-center'>R${product.price}</p>

@@ -1,9 +1,9 @@
 import React, { PropsWithChildren, useContext } from 'react'
-import Context from '../../Context/Context'
+import ProductContext from '../../types/ContextType'
 
 const Error = ({children}: PropsWithChildren) => {
 
-    const {error} = useContext(Context)
+    const {error} = useContext(ProductContext)
   return (
     <div>
       {error && <p className='font-medium text-base text-error'>{error || children}</p>}

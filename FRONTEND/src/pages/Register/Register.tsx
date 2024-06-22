@@ -5,11 +5,11 @@ import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import { FaArrowRightToBracket } from 'react-icons/fa6';
 import axios from 'axios';
-import Context from '../../Context/Context';
 import Error from '../../components/Error/Error';
 import { useNavigate } from 'react-router-dom';
 import Msgsuccess from '../../components/Msgsuccess/Msgsuccess';
 import { CircularProgress } from '@nextui-org/react';
+import ProductContext from '../../types/ContextType';
 
 const Register = () => {
 
@@ -23,7 +23,7 @@ const Register = () => {
   const [confirmpassword, setConfirmpassword] = useState('');
   const [circularloading, setCircularloading] = useState<boolean>(false)
 
-  const { error, setError, msgsuccess, setMsgsuccess } = useContext(Context);
+  const { error, setError, msgsuccess, setMsgsuccess } = useContext(ProductContext);
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 

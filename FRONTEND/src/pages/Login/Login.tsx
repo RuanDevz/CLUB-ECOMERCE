@@ -5,12 +5,12 @@ import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import { FaArrowRightToBracket } from 'react-icons/fa6';
 import Title from '../../components/Title/Title';
-import Context from '../../Context/Context';
 import axios from 'axios';
 import { useGoogleLogin } from '@react-oauth/google';
 import { useNavigate } from 'react-router-dom';
 import Error from '../../components/Error/Error';
 import {CircularProgress} from "@nextui-org/react";
+import ProductContext from '../../types/ContextType';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const Login = () => {
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const [circularloading, setCircularloading] = useState<boolean>(false)
 
-  const { setMsgsuccess, setError, accessToken, setAccessToken } = useContext(Context);
+  const { setMsgsuccess, setError, accessToken, setAccessToken } = useContext(ProductContext);
 
   useEffect(() => {
     setMsgsuccess('');

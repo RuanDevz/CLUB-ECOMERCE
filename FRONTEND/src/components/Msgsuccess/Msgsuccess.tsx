@@ -1,9 +1,9 @@
 import React, { PropsWithChildren, useContext } from 'react'
-import Context from '../../Context/Context'
+import ProductContext from '../../types/ContextType'
 
 const Msgsuccess = ({children}: PropsWithChildren) => {
 
-    const {msgsuccess} = useContext(Context)
+    const {msgsuccess} = useContext(ProductContext)
 
   return (
     <div>
