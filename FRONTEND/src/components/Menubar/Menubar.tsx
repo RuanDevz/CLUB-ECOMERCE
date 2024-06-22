@@ -59,28 +59,32 @@ export default function App() {
           </NavbarItem>
         </NavbarContent>
 
-        <NavbarMenu style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }} opened={isMenuOpen} onExited={() => setIsMenuOpen(false)}>
-          <NavbarMenuItem className="mt-10 pb-4">
-            <Link color="primary" href="#/login">Entrar</Link>
-          </NavbarMenuItem>
-          <NavbarMenuItem>
-            <Link color="primary" href="#/register" variant="flat">
-              Criar conta
-            </Link>
-          </NavbarMenuItem>
-          {menuItems.map((item, index) => (
-            <NavbarMenuItem className="mt-5" key={`${item.label}-${index}`}>
-              <Link
-                color={index === 0 ? "primary" : index === menuItems.length - 1 ? "primary" : "primary"}
-                className="w-full"
-                href={`#${item.route}`}
-                size="lg"
-              >
-                {item.label}
+        {isMenuOpen && (
+          <NavbarMenu
+            style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
+          >
+            <NavbarMenuItem className="mt-10 pb-4">
+              <Link color="primary" href="#/login">Entrar</Link>
+            </NavbarMenuItem>
+            <NavbarMenuItem>
+              <Link color="primary" href="#/register">
+                Criar conta
               </Link>
             </NavbarMenuItem>
-          ))}
-        </NavbarMenu>
+            {menuItems.map((item, index) => (
+              <NavbarMenuItem className="mt-5" key={`${item.label}-${index}`}>
+                <Link
+                  color={index === 0 ? "primary" : "primary"}
+                  className="w-full"
+                  href={`#${item.route}`}
+                  size="lg"
+                >
+                  {item.label}
+                </Link>
+              </NavbarMenuItem>
+            ))}
+          </NavbarMenu>
+        )}
       </Navbar>
     </div>
   );
