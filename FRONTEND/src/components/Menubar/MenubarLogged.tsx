@@ -1,15 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Button } from "@nextui-org/react";
 import { FaCartShopping } from "react-icons/fa6";
 import { AcmeLogo } from "./AcmeLogo.jsx";
 import Cart from "../Cart/Cart.jsx";
+import Context from "../../context/Context.js";
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const [showcartitem, setShowcartitem] = useState(false);
+  const {showCartItem, setShowCartItem} = useContext(Context);
+
+  const {products } = useContext(Context)
 
   const handlecartitem = () =>{
-    setShowcartitem(!showcartitem);
+    setShowCartItem(!showCartItem);
   }
+
+  const quantity = products.length
 
   const menuItems = [
     { label: "Explorer", route: "/explorer" },
@@ -27,9 +32,17 @@ export default function App() {
     window.location.reload();
   }
 
+  useEffect(() => {
+    if (showCartItem) {
+        document.body.style.overflowY = 'hidden'; 
+    } else {
+        document.body.style.overflowY = 'auto'; 
+    }
+}, [showCartItem]);
   return (
     <div className="flex justify-end items-center relative">
       <FaCartShopping onClick={handlecartitem} className="text-white z-50 text-xl lg:text-2xl absolute mr-10 cursor-pointer"/>
+      <span className="text-base text-white z-50 fixed right-0 mr-10">{quantity}</span>
 
       <Navbar className="bg-dark py-3" onMenuOpenChange={setIsMenuOpen}>
         <NavbarContent>
@@ -46,7 +59,7 @@ export default function App() {
           </NavbarBrand>
         </NavbarContent>
           <div>
-            {showcartitem && <Cart />}
+            {showCartItem && <Cart />}
           </div>
 
         <NavbarContent justify="end" className="hidden sm:flex gap-8 justify-center">

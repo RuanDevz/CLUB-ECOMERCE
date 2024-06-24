@@ -1,33 +1,84 @@
+import React, { useContext, useState, useEffect, useRef } from 'react';
+import Button from '../Button/Button';
+import { BsBagCheck } from 'react-icons/bs';
+import { FaMinus } from 'react-icons/fa';
+import { FaXmark } from 'react-icons/fa6';
+import { IoMdAdd } from 'react-icons/io';
+import Context from '../../context/Context';
+import AOS from 'aos';
 
-import React, { useContext, useEffect, useState } from 'react'
-import Button from '../Button/Button'
-import { BsBagCheck } from 'react-icons/bs'
-import Context from '../../context/Context'
-import { FaMinus } from "react-icons/fa";
-import { IoMdAdd } from "react-icons/io";
-import { FaXmark } from "react-icons/fa6";
-import AOS from 'aos'
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  imageUrl: string;
+}
 
-
-
-
+interface ProductQuantities {
+  [key: number]: number;
+}
 
 const Cart = () => {
+  const { products, removeCartItem, showCartItem, setShowCartItem } = useContext(Context);
 
-  const {products} = useContext(Context)
+  const [productQuantities, setProductQuantities] = useState<ProductQuantities>({});
+  const cartRef = useRef<HTMLDivElement>(null); // Referência para o elemento do carrinho
 
-  const totalprice = products.reduce((total, product) => total + product.price, 0);
+  useEffect(() => {
+    // Inicializa productQuantities apenas uma vez
+    const initialQuantities: ProductQuantities = {};
+    products.forEach(product => {
+      if (!initialQuantities[product.id]) {
+        initialQuantities[product.id] = 1; // Quantidade inicial de 1 para cada produto
+      }
+    });
+    setProductQuantities(initialQuantities);
 
-  const [quantity, setQuantity] = useState(0)
+    // Adicionar event listener para fechar o carrinho ao clicar fora
+    const handleClickOutside = (event: MouseEvent) => {
+      if (cartRef.current && !cartRef.current.contains(event.target as Node)) {
+        setShowCartItem(false);
+      }
+    };
 
-  const addquantity = () =>{
-    setQuantity(quantity + 1)
-  }
+    document.addEventListener('mousedown', handleClickOutside);
 
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [products, setShowCartItem]);
+
+  const totalprice = products.reduce((total, product) => total + product.price * (productQuantities[product.id] || 0), 0);
+
+  const addQuantity = (productId: number) => {
+    const newQuantities = { ...productQuantities };
+    if (newQuantities[productId]) {
+      newQuantities[productId] += 1; // Incrementa a quantidade se o produto já existe
+    } else {
+      newQuantities[productId] = 1; // Inicializa a quantidade como 1 se o produto não existe
+    }
+    setProductQuantities(newQuantities);
+  };
+
+  const subtractQuantity = (productId: number) => {
+    const newQuantities = { ...productQuantities };
+    if (newQuantities[productId] > 0) {
+      newQuantities[productId] -= 1;
+      setProductQuantities(newQuantities);
+    }
+  };
+
+  const handleRemove = (productId: number) => {
+    removeCartItem(productId);
+    const newQuantities = { ...productQuantities };
+    newQuantities[productId] = 0;
+    setProductQuantities(newQuantities);
+  };
 
   return (
-    <div data-aos="fade-left" className='fixed h-screen w-screen right-0 bottom-0 left-0 top-0 bg-cartbg flex justify-end transition-all 0.3 ease-in text-dark mt-20'>
-      <div className='h-full bg-white p-5 overflow-y-hidden w-cart'>
+    <>
+    <div data-aos="fade-left" className={`fixed h-screen w-screen right-0 bottom-0 left-0 top-0 bg-cartbg flex justify-end transition-all 0.3 ease-in text-dark mt-20 ${showCartItem ? '' : 'hidden'}`}>
+      <div ref={cartRef} className='h-full bg-white p-5 w-cart overflow-y-scroll'>
         <p className='mb-4 font-semibold text-2xl'>Seu carrinho</p>
         {products.map((product) => (
           <div key={product.id} className='flex items-center gap-3'>
@@ -37,27 +88,28 @@ const Cart = () => {
             <div className='flex flex-col gap-3'>
               <p className='font-primary font-semibold text-base'>{product.name}</p>
               <div className='flex justify-between w-52'>
-              <p className='font-primary font-semibold text-base text-pricecolor'>R${product.price}</p>
-              <FaXmark className='text-xl cursor-pointer mr-5'/>
+                <p className='font-primary font-semibold text-base text-pricecolor'>R${product.price}</p>
+                <FaXmark onClick={() => handleRemove(product.id)} className='text-xl cursor-pointer mr-5'/>
               </div>
               <div className='flex items-center gap-3'>
-                <FaMinus className='text-xl cursor-pointer'/>
-                <span className='text-xl cursor-pointer'>{quantity}</span>
-                <IoMdAdd onClick={addquantity} className='text-xl cursor-pointer'/>
+                <FaMinus onClick={() => subtractQuantity(product.id)} className='text-xl cursor-pointer'/>
+                <span className='text-xl cursor-pointer'>{productQuantities[product.id]}</span>
+                <IoMdAdd onClick={() => addQuantity(product.id)} className='text-xl cursor-pointer'/>
               </div>
             </div>
           </div>
         ))}
+      </div>
+      <div className='w-96 absolute bottom-0 mb-28 mr-10'>
         <p className='font-bold font-primary text-xl mb-3'>Total: R$ {totalprice}</p>
-        <div className='w-96'>
         <Button className=''>
           <BsBagCheck className='text-2xl font-extrabold'/>
           Ir para o Checkout
-          </Button>
-        </div>
+        </Button>
       </div>
     </div>
-  )
-}
+    </>
+  );
+};
 
-export default Cart
+export default Cart;

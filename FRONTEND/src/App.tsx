@@ -26,6 +26,12 @@ const App: FC = () => {
   const [products, setProducts] = useState<Product[]>([])
   const [accessToken, setAccessToken] = useState<string>('')
   const [totalprice, setTotalprice] = useState<number>(0)
+  const [showCartItem, setShowCartItem] = useState<boolean>(false);
+  
+
+  const removeCartItem = (id: number) => {
+    setProducts(products.filter(product => product.id !== id));
+  };
 
   useEffect(() =>{
     AOS.init();
@@ -36,7 +42,9 @@ const App: FC = () => {
     <ProductContext.Provider value={{
       products, setProducts,
       accessToken, setAccessToken,
-      totalprice, setTotalprice
+      totalprice, setTotalprice,
+      removeCartItem,
+      showCartItem, setShowCartItem
     }}>
       <Router>
         <Routes>

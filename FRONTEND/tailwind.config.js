@@ -39,7 +39,8 @@ export default {
         cart: '450px'
       },
       height:{
-       productheight: '414px'
+       productheight: '414px',
+       cartheight: '90vh'
       },
       maxWidth:{
         default: '1620px'

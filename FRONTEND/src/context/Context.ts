@@ -12,8 +12,11 @@ interface ContextType {
   setProducts: Dispatch<SetStateAction<Product[]>>;
   accessToken: string;
   setAccessToken: Dispatch<SetStateAction<string>>;
-  totalprice: number,
+  totalprice: number;
   setTotalprice: Dispatch<SetStateAction<number>>;
+  removeCartItem: (id: number) => void;
+  showCartItem: boolean;
+  setShowCartItem: Dispatch<SetStateAction<boolean>>; 
 }
 
 const Context = createContext<ContextType>({
@@ -22,7 +25,10 @@ const Context = createContext<ContextType>({
   accessToken: "", 
   setAccessToken: () => {},
   totalprice: 0,
-  setTotalprice: () => {}
+  setTotalprice: () => {},
+  removeCartItem: () => {},
+  showCartItem: false,
+  setShowCartItem: () => {} 
 });
 
 export default Context;
