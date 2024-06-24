@@ -13,16 +13,11 @@ import Context from '../../context/Context';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { accessToken, setAccessToken } = useContext(Context);
+  const { accessToken, setAccessToken, products } = useContext(Context);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [circularloading, setCircularloading] = useState<boolean>(false);
-
-
-  const configLogin = {
-    email: email,
-    password: password,
-  };
+  const [error, setError] = useState<string>('');
 
   useEffect(() => {
     if (accessToken) {
@@ -30,17 +25,27 @@ const Login = () => {
     }
   }, [accessToken]);
 
+  useEffect(() => {
+    console.log(products)
+  }, []);
+
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (!email || !password) {
+      setError('Por favor, preencha todos os campos.');
+      return;
+    }
+
     try {
       setCircularloading(true);
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, configLogin);
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, { email, password });
       const token = response.data.token;
       setAccessToken(token);
       sessionStorage.setItem('token', token);
       navigate('/');
     } catch (err) {
-      console.log(err);
+      setError('Credenciais inválidas. Verifique seu e-mail e senha.');
+      console.error(err);
     } finally {
       setCircularloading(false);
     }
@@ -70,9 +75,7 @@ const Login = () => {
         <form className='max-w-80 mx-auto lg:flex flex-col gap-10 mt-10 lg:max-w-96' onSubmit={handleLogin}>
           <Input onChange={(e) => setEmail(e.target.value)} label='E-mail' type='text' placeholder='Digite seu e-mail' />
           <Input onChange={(e) => setPassword(e.target.value)} label='Senha' type='password' placeholder='Digite sua senha' />
-          <div className='flex justify-center items-center'>
-            {/* Aqui você pode renderizar um componente de erro, se necessário */}
-          </div>
+          {error && <div className='text-red-500 text-sm text-center font-bold'>{error}</div>}
           <Button className='max-w-80 lg:max-w-full mt-5 lg:mt-0' type='submit'>
              {circularloading ? <CircularProgress /> : <>Entrar <FaArrowRightToBracket /></>}
           </Button>

@@ -7,11 +7,14 @@ import Context from '../../../context/Context'
 import MenubarLogged from '../../../components/Menubar/MenubarLogged'
 import ImageProduct from '../../../components/ImageProduct/ImageProduct'
 import Spacer from '../../../components/Spacer/Spacer'
+import Product from '../../../types/Product.types'
 
 const Jackets = () => {
 
 
   const [jackets, setJackets] = useState<productsProps[]>([])
+
+  const {products, setProducts, setTotalprice} = useContext(Context)
 
   const Googlelogged = sessionStorage.getItem('Googletoken')
   const userlogged = sessionStorage.getItem('token')
@@ -28,6 +31,14 @@ const Jackets = () => {
     })
   },[])
 
+  const addProductToContext = (product: Product) => {
+    const newProducts = [...products, product];
+    setProducts(newProducts);
+    console.log(newProducts)
+    setTotalprice(product.price)
+};
+
+
   return (
     <div>
     {userlogged || Googlelogged ? <MenubarLogged/> : <Header/>}
@@ -40,7 +51,7 @@ const Jackets = () => {
         <>
         {jackets.map((jacket) =>(
         <div key={jacket.id}>
-          <ImageProduct src={jacket.imageUrl} alt={jacket.name}/>
+          <ImageProduct src={jacket.imageUrl} alt={jacket.name}add={() => addProductToContext(jacket)}/>
           <div className='flex justify-between py-2'>
             <p className='font-medium text-base text-center'>{jacket.name}</p>
             <p className='font-medium text-base text-center'>R${jacket.price}</p>

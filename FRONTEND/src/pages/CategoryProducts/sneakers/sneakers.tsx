@@ -7,10 +7,13 @@ import Context from '../../../context/Context'
 import MenubarLogged from '../../../components/Menubar/MenubarLogged'
 import ImageProduct from '../../../components/ImageProduct/ImageProduct'
 import Spacer from '../../../components/Spacer/Spacer'
+import Product from '../../../types/Product.types'
 
 const Sneakers = () => {
 
   const [sneakers, setSneakers] = useState<productsProps[]>([])
+
+  const {products, setProducts, setTotalprice} = useContext(Context)
   
   const userlogged = sessionStorage.getItem('token')
   const GoogleLogged = sessionStorage.getItem('Googletoken')
@@ -27,6 +30,13 @@ const Sneakers = () => {
     })
   },[])
 
+  const addProductToContext = (product: Product) => {
+    const newProducts = [...products, product];
+    setProducts(newProducts);
+    console.log(newProducts)
+    setTotalprice(product.price)
+};
+
   return (
     <div>
       {userlogged || GoogleLogged ? <MenubarLogged/> : <Header/>}
@@ -39,7 +49,7 @@ const Sneakers = () => {
         <>
          {sneakers.map((sneaker) =>(
         <div key={sneaker.id}>
-          <ImageProduct src={sneaker.imageUrl} alt={sneaker.name}/>
+           <ImageProduct src={sneaker.imageUrl} alt={sneaker.name} add={() => addProductToContext(sneaker)} />
           <div className='flex justify-between py-2'>
             <p className='font-medium text-base text-center'>{sneaker.name}</p>
             <p className='font-medium text-base text-center'>R${sneaker.price}</p>

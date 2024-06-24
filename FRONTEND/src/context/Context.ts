@@ -12,6 +12,8 @@ interface ContextType {
   setProducts: Dispatch<SetStateAction<Product[]>>;
   accessToken: string;
   setAccessToken: Dispatch<SetStateAction<string>>;
+  totalprice: number,
+  setTotalprice: Dispatch<SetStateAction<number>>;
 }
 
 const Context = createContext<ContextType>({
@@ -19,6 +21,8 @@ const Context = createContext<ContextType>({
   setProducts: () => {},
   accessToken: "", 
   setAccessToken: () => {},
+  totalprice: 0,
+  setTotalprice: () => {}
 });
 
 export default Context;

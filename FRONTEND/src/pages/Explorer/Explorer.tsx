@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from 'react'
+import React, {useContext, useEffect, useState } from 'react'
 import Header from '../../components/Header/Header'
 import axios from 'axios'
 import productsProps from '../../types/Product.types';
@@ -6,11 +6,13 @@ import Backpage from '../Backpage/Backpage';
 import MenubarLogged from '../../components/Menubar/MenubarLogged';
 import Spacer from '../../components/Spacer/Spacer';
 import ImageProduct from '../../components/ImageProduct/ImageProduct';
+import Product from '../../types/Product.types';
+import Context from '../../context/Context';
 
 
 const Explorer = () => {
 
-  const [products, setProducts] = useState<productsProps[]>([])
+ const {products, setProducts, setTotalprice} = useContext(Context)
 
   const userlogged = sessionStorage.getItem('token')
   const Googlelogged = sessionStorage.getItem('Googletoken')
@@ -27,6 +29,13 @@ const Explorer = () => {
     })
   },[])
 
+  const addProductToContext = (product: Product) => {
+    const newProducts = [...products, product];
+    setProducts(newProducts);
+    console.log(newProducts)
+    setTotalprice(product.price)
+};
+
   return (
     <div>
       {userlogged || Googlelogged  ? <MenubarLogged/> : <Header/>}
@@ -39,7 +48,7 @@ const Explorer = () => {
           <>
           {products.map((product) =>(
           <div key={product.id}>
-            <ImageProduct src={product.imageUrl} alt={product.name}/>
+            <ImageProduct src={product.imageUrl} alt={product.name} add={() => addProductToContext(product)}/>
             <div className='flex justify-between py-2'>
               <p className='font-medium text-base text-center'>{product.name}</p>
               <p className='font-medium text-base text-center'>R${product.price}</p>

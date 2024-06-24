@@ -7,6 +7,7 @@ import Context from '../../../context/Context'
 import MenubarLogged from '../../../components/Menubar/MenubarLogged'
 import ImageProduct from '../../../components/ImageProduct/ImageProduct'
 import Spacer from '../../../components/Spacer/Spacer'
+import Product from '../../../types/Product.types'
 
 const Female = () => {
 
@@ -15,6 +16,8 @@ const Female = () => {
   const userlogged = sessionStorage.getItem('token')
   const Googlelogged = sessionStorage.getItem('Googletoken')
   console.log(userlogged)
+
+  const {products, setProducts, setTotalprice } = useContext(Context)
 
   const [loading, setLoading] = useState<boolean>(false)
 
@@ -29,6 +32,13 @@ const Female = () => {
     
   },[])
 
+  const addProductToContext = (product: Product) => {
+    const newProducts = [...products, product];
+    setProducts(newProducts);
+    console.log(newProducts)
+    setTotalprice(product.price)
+};
+
 
   return (
     <div>
@@ -42,7 +52,7 @@ const Female = () => {
         <>
         {female.map((girl) =>(
         <div key={girl.id}>
-         <ImageProduct src={girl.imageUrl} alt={girl.name}/>
+         <ImageProduct src={girl.imageUrl} alt={girl.name} add={() => addProductToContext(girl)}/>
           <div className='flex justify-between py-2'>
             <p className='font-medium text-base text-center'>{girl.name}</p>
             <p className='font-medium text-base text-center'>R${girl.price}</p>

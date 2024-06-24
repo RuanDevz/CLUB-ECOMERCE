@@ -7,6 +7,7 @@ import MenubarLogged from '../../../components/Menubar/MenubarLogged'
 import Context from '../../../context/Context'
 import ImageProduct from '../../../components/ImageProduct/ImageProduct'
 import Spacer from '../../../components/Spacer/Spacer'
+import Product from '../../../types/Product.types'
 
 const Male = () => {
 
@@ -16,6 +17,8 @@ const Male = () => {
 
   const [loading, setLoading] = useState<boolean>(false)
 
+  const {products, setProducts, setTotalprice} = useContext(Context)
+
   useEffect(() =>{
     setLoading(true)
     axios.get(`${import.meta.env.VITE_API_URL}/products/male`)
@@ -24,6 +27,13 @@ const Male = () => {
       setLoading(false)
     })
   },[])
+
+  const addProductToContext = (product: Product) => {
+    const newProducts = [...products, product];
+    setProducts(newProducts);
+    console.log(newProducts)
+    setTotalprice(product.price)
+};
 
   return (
     <div>
@@ -37,7 +47,7 @@ const Male = () => {
         <>
         {male.map((man) =>(
         <div key={man.id}>
-          <ImageProduct src={man.imageUrl} alt={man.name} />
+          <ImageProduct src={man.imageUrl} alt={man.name} add={() => addProductToContext(man)} />
           <div className='flex justify-between py-2'>
             <p className='font-medium text-base text-center'>{man.name}</p>
             <p className='font-medium text-base text-center'>R${man.price}</p>

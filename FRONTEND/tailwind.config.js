@@ -19,7 +19,8 @@ export default {
         placeholder: '#6c7570',
         error: '#FF6A6A',
         success: '#6AFF6A',
-        primary: '#fff'
+        primary: '#fff',
+        pricecolor: '#343A40'
       },
       backgroundColor:{
         backgroundinput: '#E9ECEF',
@@ -34,7 +35,8 @@ export default {
         desktop: '1920px',
         productwidth: '300px',
         buttonwidth: '270px',
-        cartwidth: '800px'
+        cartwidth: '800px',
+        cart: '450px'
       },
       height:{
        productheight: '414px'

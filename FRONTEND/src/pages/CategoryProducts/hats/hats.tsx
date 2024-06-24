@@ -12,7 +12,7 @@ const Hats = () => {
     const [hats, setHats] = useState<Product[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
 
-    const { products, setProducts } = useContext(Context)
+    const { products, setProducts,totalprice, setTotalprice } = useContext(Context)
 
     const userlogged = sessionStorage.getItem('token');
     const GoogleLogged = sessionStorage.getItem('Googletoken');
@@ -34,6 +34,7 @@ const Hats = () => {
         const newProducts = [...products, product];
         setProducts(newProducts);
         console.log(newProducts)
+        setTotalprice(product.price)
     };
 
     useEffect(() => {

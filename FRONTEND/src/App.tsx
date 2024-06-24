@@ -25,6 +25,7 @@ const App: FC = () => {
 
   const [products, setProducts] = useState<Product[]>([])
   const [accessToken, setAccessToken] = useState<string>('')
+  const [totalprice, setTotalprice] = useState<number>(0)
 
   useEffect(() =>{
     AOS.init();
@@ -34,7 +35,8 @@ const App: FC = () => {
   return (
     <ProductContext.Provider value={{
       products, setProducts,
-      accessToken, setAccessToken
+      accessToken, setAccessToken,
+      totalprice, setTotalprice
     }}>
       <Router>
         <Routes>

@@ -22,17 +22,33 @@ const Register = () => {
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-  const configRegister = {
-    nome: nome,
-    sobrenome: sobrenome,
-    email: email,
-    password: password,
-  };
-
   const handleClick = async () => {
+    setError('');
+    setMsgsuccess('');
+
+    if (!nome || !sobrenome || !email || !password || !confirmpassword) {
+      setError('Por favor, preencha todos os campos.');
+      return;
+    }
+
+    if (!emailRegex.test(email)) {
+      setError('Formato de e-mail inválido.');
+      return;
+    }
+
+    if (password !== confirmpassword) {
+      setError('As senhas não coincidem.');
+      return;
+    }
+
     try {
       setCircularloading(true);
-      await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, configRegister);
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, {
+        nome,
+        sobrenome,
+        email,
+        password,
+      });
       setMsgsuccess('Cadastro realizado com sucesso!');
       setTimeout(() => {
         navigate('/login');
@@ -62,8 +78,8 @@ const Register = () => {
           <Input onChange={(e) => setConfirmpassword(e.target.value)} label='Confirmação de Senha' type='password' placeholder='Confirme sua senha' />
 
           <div className='flex justify-center items-center'>
-            <p className='text-red-500'>{error}</p>
-            <p className='text-green-500'>{msgsuccess}</p>
+            <p className='text-red-500 font-bold'>{error}</p>
+            <p className='text-green-500 font-bold'>{msgsuccess}</p>
           </div>
         </form>
         <Button onClick={handleClick} className='flex items-center mt-7'>
