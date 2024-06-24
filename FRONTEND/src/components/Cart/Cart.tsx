@@ -5,7 +5,6 @@ import { FaMinus } from 'react-icons/fa';
 import { FaXmark } from 'react-icons/fa6';
 import { IoMdAdd } from 'react-icons/io';
 import Context from '../../context/Context';
-import AOS from 'aos';
 
 interface Product {
   id: number;
@@ -22,19 +21,19 @@ const Cart = () => {
   const { products, removeCartItem, showCartItem, setShowCartItem } = useContext(Context);
 
   const [productQuantities, setProductQuantities] = useState<ProductQuantities>({});
-  const cartRef = useRef<HTMLDivElement>(null); // Referência para o elemento do carrinho
+  const cartRef = useRef<HTMLDivElement>(null); 
 
   useEffect(() => {
-    // Inicializa productQuantities apenas uma vez
+
     const initialQuantities: ProductQuantities = {};
     products.forEach(product => {
       if (!initialQuantities[product.id]) {
-        initialQuantities[product.id] = 1; // Quantidade inicial de 1 para cada produto
+        initialQuantities[product.id] = 1;
       }
     });
     setProductQuantities(initialQuantities);
 
-    // Adicionar event listener para fechar o carrinho ao clicar fora
+
     const handleClickOutside = (event: MouseEvent) => {
       if (cartRef.current && !cartRef.current.contains(event.target as Node)) {
         setShowCartItem(false);
@@ -53,9 +52,9 @@ const Cart = () => {
   const addQuantity = (productId: number) => {
     const newQuantities = { ...productQuantities };
     if (newQuantities[productId]) {
-      newQuantities[productId] += 1; // Incrementa a quantidade se o produto já existe
+      newQuantities[productId] += 1; 
     } else {
-      newQuantities[productId] = 1; // Inicializa a quantidade como 1 se o produto não existe
+      newQuantities[productId] = 1;
     }
     setProductQuantities(newQuantities);
   };
