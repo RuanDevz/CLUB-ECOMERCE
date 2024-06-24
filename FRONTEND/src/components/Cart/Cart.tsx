@@ -79,6 +79,7 @@ const Cart = () => {
     <div data-aos="fade-left" className={`fixed h-screen w-screen right-0 bottom-0 left-0 top-0 bg-cartbg flex justify-end transition-all 0.3 ease-in text-dark mt-20 ${showCartItem ? '' : 'hidden'}`}>
       <div ref={cartRef} className='h-full bg-white p-5 w-cart overflow-y-scroll'>
         <p className='mb-4 font-semibold text-2xl'>Seu carrinho</p>
+        <div className='h-[500px] overflow-y-auto'>
         {products.map((product) => (
           <div key={product.id} className='flex items-center gap-3'>
             <div>
@@ -98,6 +99,7 @@ const Cart = () => {
             </div>
           </div>
         ))}
+        </div>
       </div>
       <div className='w-96 absolute bottom-0 mb-28 mr-10'>
         <p className='font-bold font-primary text-xl mb-3'>Total: R$ {totalprice}</p>
