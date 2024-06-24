@@ -5,6 +5,8 @@ import { FaMinus } from 'react-icons/fa';
 import { FaXmark } from 'react-icons/fa6';
 import { IoMdAdd } from 'react-icons/io';
 import Context from '../../context/Context';
+import { useNavigate } from 'react-router-dom';
+
 
 interface Product {
   id: number;
@@ -23,6 +25,8 @@ const Cart = () => {
   const [productQuantities, setProductQuantities] = useState<ProductQuantities>({});
   const cartRef = useRef<HTMLDivElement>(null); 
 
+  const navigate = useNavigate()
+
   useEffect(() => {
 
     const initialQuantities: ProductQuantities = {};
@@ -33,18 +37,6 @@ const Cart = () => {
     });
     setProductQuantities(initialQuantities);
 
-
-    const handleClickOutside = (event: MouseEvent) => {
-      if (cartRef.current && !cartRef.current.contains(event.target as Node)) {
-        setShowCartItem(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
   }, [products, setShowCartItem]);
 
   const totalprice = products.reduce((total, product) => total + product.price * (productQuantities[product.id] || 0), 0);
@@ -74,12 +66,19 @@ const Cart = () => {
     setProductQuantities(newQuantities);
   };
 
+  const handlecartitem = (event: any) =>{
+    if(event.target.id === 'modalcart'){
+      setShowCartItem(false)
+    }
+  }
+  
+
   return (
     <>
-    <div data-aos="fade-left" className={`fixed h-screen w-screen right-0 bottom-0 left-0 top-0 bg-cartbg flex justify-end transition-all 0.3 ease-in text-dark mt-20 ${showCartItem ? '' : 'hidden'}`}>
-      <div ref={cartRef} className='h-full bg-white p-5 w-cart overflow-y-scroll'>
+    <div onClick={handlecartitem} id='modalcart' className={`fixed h-screen w-screen right-0 bottom-0 left-0 top-0 bg-cartbg  bg-opacity-10 inset-0 backdrop-blur-sm flex justify-end text-dark mt-20 ${showCartItem ? '' : 'hidden'}`}>
+      <div ref={cartRef} className={`h-full bg-white p-5 w-cart overflow-y-scroll`}>
         <p className='mb-4 font-semibold text-2xl'>Seu carrinho</p>
-        <div className='h-[500px] overflow-y-auto'>
+        <div className='h-[630px] overflow-y-auto'>
         {products.map((product) => (
           <div key={product.id} className='flex items-center gap-3'>
             <div>
@@ -101,9 +100,9 @@ const Cart = () => {
         ))}
         </div>
       </div>
-      <div className='w-96 absolute bottom-0 mb-28 mr-10'>
+      <div  className='w-96 absolute bottom-0 mb-28 mr-10'>
         <p className='font-bold font-primary text-xl mb-3'>Total: R$ {totalprice}</p>
-        <Button className=''>
+        <Button onClick={() => navigate('/checkout')} className=''>
           <BsBagCheck className='text-2xl font-extrabold'/>
           Ir para o Checkout
         </Button>

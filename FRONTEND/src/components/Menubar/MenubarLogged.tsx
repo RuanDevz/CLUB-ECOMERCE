@@ -4,7 +4,13 @@ import { FaCartShopping } from "react-icons/fa6";
 import { AcmeLogo } from "./AcmeLogo.jsx";
 import Cart from "../Cart/Cart.jsx";
 import Context from "../../context/Context.js";
-export default function App() {
+
+
+
+export default function MenubarLogged() {
+
+
+
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const {showCartItem, setShowCartItem} = useContext(Context);
 
@@ -12,6 +18,12 @@ export default function App() {
 
   const handlecartitem = () =>{
     setShowCartItem(!showCartItem);
+  }
+
+    const handlemodal = (event: any) =>{
+    if(event.target.id === 'modalcart'){
+      setShowCartItem(false)
+    }
   }
 
   const quantity = products.length
@@ -39,8 +51,9 @@ export default function App() {
         document.body.style.overflowY = 'auto'; 
     }
 }, [showCartItem]);
+
   return (
-    <div className="flex justify-end items-center relative">
+    <div onClick={handlemodal} id='modalcart' className="flex justify-end items-center relative">
       <FaCartShopping onClick={handlecartitem} className="text-white z-50 text-xl lg:text-2xl absolute mr-10 cursor-pointer"/>
       <span className="text-base text-white z-50 fixed right-0 mr-10">{quantity}</span>
 

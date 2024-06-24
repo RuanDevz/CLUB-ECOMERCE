@@ -12,6 +12,7 @@ import Tenis from './pages/CategoryProducts/sneakers/sneakers';
 import DashboardLogged from './components/DashboardLogged/DashboardLogged';
 import AOS from 'aos'
 import ProductContext from './context/Context';
+import Checkout from './components/Checkout/Checkout';
 
 interface Product {
   id: number;
@@ -58,6 +59,7 @@ const App: FC = () => {
           <Route path='/male' element={<Masculino />} />
           <Route path='/female' element={<Feminino />} />
           <Route path='/dashboard' element={<DashboardLogged />} />
+          <Route path='/checkout' element={<Checkout/>} />
         </Routes>
       </Router>
       </ProductContext.Provider>
