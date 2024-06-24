@@ -4,7 +4,7 @@ import Backpage from '../../Backpage/Backpage'
 import productsProps from '../../../types/Product.types'
 import axios from 'axios'
 import MenubarLogged from '../../../components/Menubar/MenubarLogged'
-import Context from '../../../Context/Context'
+import Context from '../../../context/Context'
 import ImageProduct from '../../../components/ImageProduct/ImageProduct'
 import Spacer from '../../../components/Spacer/Spacer'
 

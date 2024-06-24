@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App.tsx';
+import App from './App.js';
 import './index.css';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { NextUIProvider } from '@nextui-org/react';

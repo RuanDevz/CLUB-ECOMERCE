@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import './input.css';
-import Context from '../../Context/Context';
+import Context from '../../context/Context';
 
 type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   label?: string;

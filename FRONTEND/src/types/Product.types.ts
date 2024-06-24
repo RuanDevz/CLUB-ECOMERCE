@@ -1,12 +1,8 @@
-
-
-type productsProps = {
-    id: number,
-    name: string,
-    price: number,
-    imageUrl: string,
-    category: string
-    setProducts: () => void
+interface Product {
+    id: number;
+    name: string;
+    price: number;
+    imageUrl: string
   }
 
-  export default productsProps
+  export default Product

@@ -1,29 +1,24 @@
-import React, { PropsWithChildren, useContext, useState } from 'react';
+import React, { useState } from 'react';
 import Title from '../../components/Title/Title';
 import Header from '../../components/Header/Header';
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import { FaArrowRightToBracket } from 'react-icons/fa6';
 import axios from 'axios';
-import Error from '../../components/Error/Error';
 import { useNavigate } from 'react-router-dom';
-import Msgsuccess from '../../components/Msgsuccess/Msgsuccess';
 import { CircularProgress } from '@nextui-org/react';
-import ProductContext from '../../types/ContextType';
 
 const Register = () => {
-
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [nome, setNome] = useState('');
   const [sobrenome, setSobrenome] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmpassword, setConfirmpassword] = useState('');
-  const [circularloading, setCircularloading] = useState<boolean>(false)
-
-  const { error, setError, msgsuccess, setMsgsuccess } = useContext(ProductContext);
+  const [circularloading, setCircularloading] = useState<boolean>(false);
+  const [error, setError] = useState<string>(''); // Estado para exibir erros
+  const [msgsuccess, setMsgsuccess] = useState<string>(''); // Estado para exibir sucesso
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -31,35 +26,22 @@ const Register = () => {
     nome: nome,
     sobrenome: sobrenome,
     email: email,
-    password: password
+    password: password,
   };
 
   const handleClick = async () => {
-    if (password !== confirmpassword) {
-      setError('As senhas precisam ser iguais');
-      return;
-    } else if (nome.length < 3) {
-      setError('Seu nome precisa ter pelo menos 3 caracteres');
-      return;
-    } else if (!emailRegex.test(email)) {
-      setError('Insira um e-mail válido');
-      return;
-    } else {
-      setError('');
-      try {
-        setCircularloading(true)
-        await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, configRegister);
-        setMsgsuccess('Usuario criado!')
-        setTimeout(() => {
-          navigate('/login')
-        }, 2000);
-        setCircularloading(false)
-      } catch (error) {
-        setError('Email já cadastrado!');
-        console.error(error);
-      }finally{
-        setCircularloading(false)
-      }
+    try {
+      setCircularloading(true);
+      await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, configRegister);
+      setMsgsuccess('Cadastro realizado com sucesso!');
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
+    } catch (error) {
+      setError('Ocorreu um erro ao tentar registrar. Por favor, tente novamente.');
+      console.error(error);
+    } finally {
+      setCircularloading(false);
     }
   };
 
@@ -78,13 +60,14 @@ const Register = () => {
           <Input onChange={(e) => setPassword(e.target.value)} label='Senha' type='password' placeholder='Digite sua senha' />
 
           <Input onChange={(e) => setConfirmpassword(e.target.value)} label='Confirmação de Senha' type='password' placeholder='Confirme sua senha' />
-            <div className='flex justify-center items-center'>
-              <Error>{error}</Error>
-              <Msgsuccess>{msgsuccess}</Msgsuccess>
-            </div>
+
+          <div className='flex justify-center items-center'>
+            <p className='text-red-500'>{error}</p>
+            <p className='text-green-500'>{msgsuccess}</p>
+          </div>
         </form>
         <Button onClick={handleClick} className='flex items-center mt-7'>
-          {circularloading ? <CircularProgress /> : <><FaArrowRightToBracket />Criar Conta</>}
+          {circularloading ? <CircularProgress /> : <><FaArrowRightToBracket /> Criar Conta</>}
         </Button>
       </main>
     </div>

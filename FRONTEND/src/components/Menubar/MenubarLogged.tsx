@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Link, Button } from "@nextui-org/react";
 import { FaCartShopping } from "react-icons/fa6";
 
 import { AcmeLogo } from "./AcmeLogo.jsx";
 import Cart from "../Cart/Cart.jsx";
+import AOS from 'aos'
 
 
 export default function App() {
@@ -14,6 +15,10 @@ export default function App() {
   const handlecartitem = () =>{
     setShowcartitem(!showcartitem)
   }
+
+  useEffect(() =>{
+    AOS.init({duration: 1000})
+  },[])
 
   const menuItems = [
     { label: "Explorer", route: "/explorer" },
@@ -49,7 +54,9 @@ export default function App() {
             <p className="text-xl font-bold lg:text-2xl text-inherit text-white">CLUB CLOTHING</p></Link>
           </NavbarBrand>
         </NavbarContent>
-        {showcartitem && <Cart />}
+        <div data-aos="fade-left">
+          {showcartitem && <Cart />}
+        </div>
         
 
         <NavbarContent justify="end" className="hidden sm:flex gap-8 justify-center">

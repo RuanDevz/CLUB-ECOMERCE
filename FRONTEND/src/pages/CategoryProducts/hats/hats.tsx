@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import productsProps from '../../../types/Product.types';
-import Header from '../../../components/Header/Header';
-import Backpage from '../../Backpage/Backpage';
-import ProductContext, { ContextType } from '../../../types/ContextType'; // Importe o tipo ContextType aqui
 import MenubarLogged from '../../../components/Menubar/MenubarLogged';
 import ImageProduct from '../../../components/ImageProduct/ImageProduct';
 import Spacer from '../../../components/Spacer/Spacer';
+import Header from '../../../components/Header/Header';
+import Backpage from '../../Backpage/Backpage';
+import Context from '../../../context/Context';
+import Product from '../../../types/Product.types';
 
 const Hats = () => {
-    const [hats, setHats] = useState<productsProps[]>([]);
+    const [hats, setHats] = useState<Product[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
 
-    const { products, setProducts } = useContext<ContextType>(ProductContext);
+    const { products, setProducts } = useContext(Context)
 
     const userlogged = sessionStorage.getItem('token');
     const GoogleLogged = sessionStorage.getItem('Googletoken');
@@ -30,18 +30,15 @@ const Hats = () => {
             });
     };
 
-    const addProductToContext = (product: productsProps) => {
-        setProducts(prevProducts => [...prevProducts, product]);
+    const addProductToContext = (product: Product) => {
+        const newProducts = [...products, product];
+        setProducts(newProducts);
+        console.log(newProducts)
     };
 
     useEffect(() => {
         fetchHats();
     }, []);
-
-    // useEffect para visualizar o estado atualizado de products
-    useEffect(() => {
-        console.log(products); // Exibe o estado atualizado de products sempre que for modificado
-    }, [products]); // Monitora mudanças em products
 
     return (
         <div>
