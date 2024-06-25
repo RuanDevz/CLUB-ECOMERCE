@@ -12,14 +12,17 @@ import {Link} from 'react-router-dom'
 
 const Checkout = () => {
   const { products, removeCartItem } = useContext(Context);
-  const [productQuantities, setProductQuantities] = useState<any>({});
+  const [productQuantities, setProductQuantities] = useState<any>(
+    Object.fromEntries(products.map(product => [product.id, 1]))
+  );
+
 
   const totalprice = products.reduce((total, product) => total + product.price * (productQuantities[product.id] || 1), 0);
 
   const addQuantity = (productId: number) => {
     const newQuantities = { ...productQuantities };
     if (newQuantities[productId]) {
-      newQuantities[productId] += 1; 
+      newQuantities[productId] = (newQuantities[productId] || 1) + 1;; 
     } else {
       newQuantities[productId] = 1;
     }
