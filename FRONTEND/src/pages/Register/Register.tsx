@@ -64,9 +64,9 @@ const Register = () => {
   return (
     <div>
       <Header />
-      <main className='flex justify-center items-center flex-col mt-1'>
+      <main className='flex justify-center items-center flex-col'>
         <Title className='border-b border-dark'>Crie a sua conta</Title>
-        <form className='mt-16 flex flex-col gap-5 w-96' onSubmit={(e) => e.preventDefault()}>
+        <form className='w-80 mt-0 lg:mt-16 flex flex-col gap-5 lg:w-96' onSubmit={(e) => e.preventDefault()}>
           <Input onChange={(e) => setNome(e.target.value)} label='Nome' type='text' placeholder='Digite seu nome' />
 
           <Input onChange={(e) => setSobrenome(e.target.value)} label='Sobrenome' type='text' placeholder='Digite seu sobrenome' />
@@ -78,11 +78,11 @@ const Register = () => {
           <Input onChange={(e) => setConfirmpassword(e.target.value)} label='Confirmação de Senha' type='password' placeholder='Confirme sua senha' />
 
           <div className='flex justify-center items-center'>
-            <p className='text-red-500 font-bold'>{error}</p>
-            <p className='text-green-500 font-bold'>{msgsuccess}</p>
           </div>
         </form>
-        <Button onClick={handleClick} className='flex items-center mt-7'>
+        {error && <p className='font-bold text-red-600'>{error}</p>}
+        {msgsuccess && <p className='font-bold text-green-600'>{msgsuccess}</p>}
+        <Button onClick={handleClick} className='max-w-80 mb-10 lg:flex items-center mt-7 lg:max-w-96'>
           {circularloading ? <CircularProgress /> : <><FaArrowRightToBracket /> Criar Conta</>}
         </Button>
       </main>

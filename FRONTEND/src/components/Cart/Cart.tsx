@@ -71,6 +71,11 @@ const Cart = () => {
       setShowCartItem(false)
     }
   }
+
+  const GotoCheckout = () =>{
+    navigate('/checkout')
+    setShowCartItem(false)
+  }
   
 
   return (
@@ -102,7 +107,7 @@ const Cart = () => {
       </div>
       <div  className='w-96 absolute bottom-0 mb-28 mr-10'>
         <p className='font-bold font-primary text-xl mb-3'>Total: R$ {totalprice}</p>
-        <Button onClick={() => navigate('/checkout')} className=''>
+        <Button onClick={GotoCheckout} className=''>
           <BsBagCheck className='text-2xl font-extrabold'/>
           Ir para o Checkout
         </Button>
