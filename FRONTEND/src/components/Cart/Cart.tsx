@@ -83,7 +83,7 @@ const Cart = () => {
     <div onClick={handlecartitem} id='modalcart' className={`fixed h-screen w-screen right-0 bottom-0 left-0 top-0 bg-cartbg  bg-opacity-10 inset-0 backdrop-blur-sm flex justify-end text-dark mt-20 ${showCartItem ? '' : 'hidden'}`}>
       <div ref={cartRef} className={`h-full bg-white p-5 w-cart overflow-y-scroll`}>
         <p className='mb-4 font-semibold text-2xl'>Seu carrinho</p>
-        <div className='h-[630px] overflow-y-auto'>
+        <div className='h-[380px] lg:h-[630px] overflow-y-auto'>
         {products.map((product) => (
           <div key={product.id} className='flex items-center gap-3'>
             <div>
@@ -104,13 +104,13 @@ const Cart = () => {
           </div>
         ))}
         </div>
-      </div>
-      <div  className='w-96 absolute bottom-0 mb-28 mr-10'>
+        <div  className='text-center w-full mt-20 lg:w-96 lg:mt-5 lg:text-left bottom-0  mr-10'>
         <p className='font-bold font-primary text-xl mb-3'>Total: R$ {totalprice}</p>
-        <Button onClick={GotoCheckout} className=''>
+        <Button onClick={GotoCheckout} className='w-[47vh] lg:w-[400px]'>
           <BsBagCheck className='text-2xl font-extrabold'/>
           Ir para o Checkout
         </Button>
+      </div>
       </div>
     </div>
     </>

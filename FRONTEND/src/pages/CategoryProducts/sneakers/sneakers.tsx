@@ -42,7 +42,7 @@ const Sneakers = () => {
       {userlogged || GoogleLogged ? <MenubarLogged/> : <Header/>}
     <main>
       <Backpage>Explorar Tênis</Backpage>
-    <section className='max-w-default flex justify-around items-center gap-10 flex-wrap mx-auto'>
+    <section className='flex justify-center lg:max-w-default lg:flex lg:justify-around items-center gap-10 flex-wrap mx-auto'>
       {loading ? (
         <Spacer/>
       ):(

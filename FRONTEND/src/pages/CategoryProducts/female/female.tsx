@@ -45,7 +45,7 @@ const Female = () => {
     {userlogged || Googlelogged ? <MenubarLogged/> : <Header/>}
     <main>
       <Backpage>Explorar Feminino</Backpage>
-    <section className='max-w-default flex justify-around items-center gap-10 flex-wrap mx-auto'>
+    <section className='flex justify-center lg:max-w-default lg:flex lg:justify-around items-center gap-10 flex-wrap mx-auto'>
       {loading ? (
         <Spacer/>
       ):(
