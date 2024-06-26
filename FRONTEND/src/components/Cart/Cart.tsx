@@ -121,15 +121,13 @@ const Cart = () => {
               </div>
             ))}
           </div>
-          <div className=''>
-            <div className='absolute bottom-24'>
+          <div className='flex justify-center items-center flex-col mx-auto ml-3 mt-5'>
             <p className='font-bold font-primary text-xl mb-3'>Total: R$ {totalprice}</p>
             <Button onClick={GotoCheckout} className='w-[45vh] lg:w-[400px]'>
               <BsBagCheck className='text-2xl font-extrabold' />
               Ir para o Checkout
             </Button>
             </div>
-          </div>
         </div>
       </div>
     </>
