@@ -118,6 +118,7 @@ const Cart = () => {
                     <IoMdAdd onClick={() => addQuantity(product.id)} className='text-xl cursor-pointer' />
                   </div>
                 </div>
+                
               </div>
             ))}
           </div>
