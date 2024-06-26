@@ -21,6 +21,10 @@ interface ProductQuantities {
 }
 
 const Cart = () => {
+
+  const UserLogged = sessionStorage.getItem('token')
+  const GoogleLogeed = sessionStorage.getItem('Googletoken')
+
   const { products, removeCartItem, showCartItem, setShowCartItem } = useContext(Context);
 
   const [productQuantities, setProductQuantities] = useState<ProductQuantities>({});
@@ -74,8 +78,14 @@ const Cart = () => {
   }
 
   const GotoCheckout = () =>{
-    navigate('/checkout')
-    setShowCartItem(false)
+    if(UserLogged || GoogleLogeed){
+      navigate('/checkout')
+      setShowCartItem(false)
+    } else{
+      alert('Você precisa estar logado para comprar')
+      navigate('/login')
+      setShowCartItem(false)
+    }
   }
   
 

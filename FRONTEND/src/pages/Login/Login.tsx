@@ -56,12 +56,26 @@ const Login = () => {
       const token = tokenResponse.access_token;
       setAccessToken(token);
       sessionStorage.setItem('Googletoken', token);
+      fetchUserInfo(token)
       navigate('/');
     },
     onError: (errorResponse) => {
       console.error(errorResponse);
     },
   });
+
+  const fetchUserInfo = (accessToken: string) => {
+    fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Informações do usuário:', data);
+      })
+      .catch(error => console.error('Erro ao obter informações do usuário:', error));
+  };
 
   return (
     <div>
