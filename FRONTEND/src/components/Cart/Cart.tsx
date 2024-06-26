@@ -100,7 +100,7 @@ const Cart = () => {
       <div onClick={handlecartitem} id='modalcart' className={`fixed h-screen animated transition-all duration-300 ease-in-out w-screen right-0 bottom-0 left-0 top-0 bg-cartbg bg-opacity-10 inset-0 backdrop-blur-sm flex justify-end text-dark mt-20 ${showCartItem ? '' : 'hidden'}`}>
         <div ref={cartRef} className={`h-full bg-white p-5 w-cart overflow-y-scroll`}>
           <p className='mb-4 font-semibold text-2xl'>Seu carrinho</p>
-          <div className='h-[380px] 2xl:h-[630px] overflow-y-auto lg:h-[440px]'>
+          <div className='h-[380px] 2xl:h-[630px] overflow-y-auto lg:h-[55vh]'>
             {products.map((product) => (
               <div key={product.id} className='flex items-center gap-3'>
                 <div>
