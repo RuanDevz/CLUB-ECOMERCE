@@ -20,7 +20,8 @@ export default {
         error: '#FF6A6A',
         success: '#6AFF6A',
         primary: '#fff',
-        pricecolor: '#343A40'
+        pricecolor: '#343A40',
+        segundary: '#696969'
       },
       backgroundColor:{
         backgroundinput: '#E9ECEF',
