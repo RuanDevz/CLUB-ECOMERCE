@@ -14,6 +14,7 @@ import AOS from 'aos'
 import ProductContext from './context/Context';
 import Checkout from './components/Checkout/Checkout';
 import Payment from './components/Payment/Payment';
+import Footer from './components/Footer/Footer';
 
 interface Product {
   id: number;
@@ -65,6 +66,7 @@ const App: FC = () => {
           <Route path='/checkout' element={<Checkout/>} />
           <Route path='/payment' element={<Payment/>}/>
         </Routes>
+        <Footer/>
       </Router>
       </ProductContext.Provider>
   );

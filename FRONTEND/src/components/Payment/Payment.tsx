@@ -11,7 +11,8 @@ const Payment = () => {
     <div>
       {userlogged || GoogleLogged ? <MenubarLogged /> : <Header />}
       <Title className='text-center text-3xl'>Compra realizada com sucesso!</Title>
-      <p className='text-center font-medium'>O Club Cloathing não possui fins lucrativos, o projeto foi desenvolvido apenas para estudo e futuras aplicações.</p>
+      <p className='text-center font-medium'>O Club Clothing não possui fins lucrativos, o projeto foi desenvolvido apenas para estudo e futuras aplicações.</p>
+      
     </div>
   )
 }

@@ -43,7 +43,7 @@ const Checkout = () => {
       </div>
       <div className='h-[550px] overflow-y-auto'>
         {products.map((product) => (
-          <div key={product.id} className='max-w-[350px] lg:flex items-center justify-center gap-3 lg:max-w-[650px] mx-auto'>
+          <div key={product.id} className='max-w-[350px] lg:flex items-center justify-center gap-3 lg:max-w-[650px] mx-auto '>
             <div className='flex justify-center lg:block'>
               <img className='w-52 h-64 rounded-lg my-5' src={product.imageUrl} alt={product.name} />
             </div>
