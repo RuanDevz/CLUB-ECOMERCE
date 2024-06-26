@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -11,9 +11,15 @@ import {
   Button
 } from "@nextui-org/react";
 import { AcmeLogo } from "./AcmeLogo.jsx";
+import { FaCartShopping } from "react-icons/fa6";
+import Context from "../../context/Context.js";
+import Cart from "../Cart/Cart.js";
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+
+  const {setShowCartItem,showCartItem, products } = useContext(Context)
+  const quantity = products.length
 
   const menuItems = [
     { label: "Explorer", route: "/explorer" },
@@ -24,9 +30,31 @@ export default function App() {
     { label: "Feminino", route: "/female" },
   ];
 
+  const handlecartitem = () =>{
+    setShowCartItem(!showCartItem);
+  }
+
+    const handlemodal = (event: any) =>{
+    if(event.target.id === 'modalcart'){
+      setShowCartItem(false)
+    }
+  }
+
+  useEffect(() => {
+    if (showCartItem) {
+        document.body.style.overflowY = 'hidden'; 
+    } else {
+        document.body.style.overflowY = 'auto'; 
+    }
+}, [showCartItem]);
+
   return (
-    <div>
-      <Navbar className="bg-dark">
+    <div  onClick={handlemodal} id='modalcart' className="flex justify-end items-center flex-row-reverse relative">
+      <div className="absolute right-0 mr-10 flex flex-row-reverse mt-2">
+          <FaCartShopping onClick={handlecartitem} className="text-white z-50 text-xl lg:text-2xl absolute mr-10 cursor-pointer"/>
+        <span className="text-base text-white z-50">{quantity}</span>
+      </div>
+       <Navbar className="bg-dark">
         <NavbarContent>
           <NavbarMenuToggle
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -38,6 +66,7 @@ export default function App() {
            <p className="text-xl font-bold lg:text-2xl text-inherit text-white">CLUB CLOTHING</p></Link>
           </NavbarBrand>
         </NavbarContent>
+        {showCartItem && <Cart />}
 
         <NavbarContent justify="end">
           <NavbarItem className="hidden lg:flex">
