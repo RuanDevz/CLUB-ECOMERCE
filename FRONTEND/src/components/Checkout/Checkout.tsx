@@ -19,9 +19,20 @@ const Checkout = () => {
   });
 
   const handleRemove = (productId: number) => {
+
     removeCartItem(productId);
+  
+
     const newQuantities = { ...productQuantities };
+  
+
     newQuantities[productId] = 0;
+
+    const newTotalPrice = products.reduce((total, product) => {
+      return total + product.price * (newQuantities[product.id] || 0); 
+    }, 0);
+
+    setTotalPrice(newTotalPrice);
   };
 
   const [isLoading, setIsLoading] = useState(false);
