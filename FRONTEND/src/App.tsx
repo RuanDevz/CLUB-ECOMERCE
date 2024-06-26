@@ -28,6 +28,7 @@ const App: FC = () => {
   const [accessToken, setAccessToken] = useState<string>('')
   const [totalprice, setTotalprice] = useState<number>(0)
   const [showCartItem, setShowCartItem] = useState<boolean>(false);
+  const [totalItems, setTotalItems] = useState<number>(0);
   
 
   const removeCartItem = (id: number) => {
@@ -45,7 +46,8 @@ const App: FC = () => {
       accessToken, setAccessToken,
       totalprice, setTotalprice,
       removeCartItem,
-      showCartItem, setShowCartItem
+      showCartItem, setShowCartItem,
+      totalItems
     }}>
       <Router>
         <Routes>

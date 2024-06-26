@@ -16,7 +16,8 @@ interface ContextType {
   setTotalprice: Dispatch<SetStateAction<number>>;
   removeCartItem: (id: number) => void;
   showCartItem: boolean;
-  setShowCartItem: Dispatch<SetStateAction<boolean>>; 
+  setShowCartItem: Dispatch<SetStateAction<boolean>>;
+  totalItems: number
 }
 
 const Context = createContext<ContextType>({
@@ -28,7 +29,8 @@ const Context = createContext<ContextType>({
   setTotalprice: () => {},
   removeCartItem: () => {},
   showCartItem: false,
-  setShowCartItem: () => {} 
+  setShowCartItem: () => {} ,
+  totalItems: 0
 });
 
 export default Context;

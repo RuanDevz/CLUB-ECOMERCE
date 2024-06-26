@@ -8,13 +8,16 @@ import { FaXmark } from 'react-icons/fa6';
 import { BsBagCheck } from 'react-icons/bs';
 import Button from '../Button/Button';
 import Backpage from '../../pages/Backpage/Backpage';
-import {Link} from 'react-router-dom'
+import {Link, useLocation} from 'react-router-dom'
 
 const Checkout = () => {
   const { products, removeCartItem } = useContext(Context);
-  const [productQuantities, setProductQuantities] = useState<any>(
+  const [setProductQuantities] = useState<any>(
     Object.fromEntries(products.map(product => [product.id, 1]))
   );
+
+  const location = useLocation();
+  const { productQuantities } = location.state;
 
 
   const totalprice = products.reduce((total, product) => total + product.price * (productQuantities[product.id] || 1), 0);
@@ -56,8 +59,9 @@ const Checkout = () => {
           
         </div>
       </div>
+      <div className='h-[550px] overflow-y-auto'>
       {products.map((product) => (
-        <div key={product.id} className='max-w-[350px] lg:flex items-center justify-center gap-3 lg:max-w-[650px] mx-auto'>
+        <div key={product.id} className=' max-w-[350px] lg:flex items-center justify-center gap-3 lg:max-w-[650px] mx-auto'>
           <div className='flex justify-center lg:block'>
             <img className='w-52 h-64 rounded-lg my-5' src={product.imageUrl} alt={product.name} />
           </div>
@@ -67,14 +71,13 @@ const Checkout = () => {
               <p className='text-center lg:font-primary font-semibold text-base text-pricecolor'>R${product.price}</p>
               <FaXmark onClick={() => handleRemove(product.id)} className='hidden lg:text-xl lg:flex cursor-pointer mr-5'/>
             </div>
-            <div className='flex items-center gap-3'>
-              <FaMinus onClick={() => subtractQuantity(product.id)} className='hidden lg:text-xl cursor-pointer lg:flex'/>
-              <span className='text-xl cursor-pointer'>{productQuantities[product.id]}</span>
-              <IoMdAdd onClick={() => addQuantity(product.id)} className='hidden lg:text-xl cursor-pointer lg:flex'/>
+            <div className='flex justify-center items-center gap-3 lg:justify-start'>
+              <span className='lg:text-xl text-dark font-semibold'>Quantidade: {productQuantities[product.id]}</span>
             </div>
           </div>
         </div>
       ))}
+      </div>
       <div className='flex justify-center items-center  lg:flex lg:justify-start flex-col lg:items-start mt-10 max-w-[650px] mx-auto'>
         <p className='font-bold font-primary text-xl mb-3'>Total: R$ {totalprice}</p>
         <Button className='w-[350px] lg:w-[650px]'>
