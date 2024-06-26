@@ -13,6 +13,7 @@ import DashboardLogged from './components/DashboardLogged/DashboardLogged';
 import AOS from 'aos'
 import ProductContext from './context/Context';
 import Checkout from './components/Checkout/Checkout';
+import Payment from './components/Payment/Payment';
 
 interface Product {
   id: number;
@@ -62,6 +63,7 @@ const App: FC = () => {
           <Route path='/female' element={<Feminino />} />
           <Route path='/dashboard' element={<DashboardLogged />} />
           <Route path='/checkout' element={<Checkout/>} />
+          <Route path='/payment' element={<Payment/>}/>
         </Routes>
       </Router>
       </ProductContext.Provider>

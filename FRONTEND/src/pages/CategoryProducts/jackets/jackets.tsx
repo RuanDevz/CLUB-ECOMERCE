@@ -32,10 +32,13 @@ const Jackets = () => {
   },[])
 
   const addProductToContext = (product: Product) => {
+    if (products.some(p => p.id === product.id)) {
+        alert('Este produto já foi adicionado ao carrinho.');
+        return;
+    }
     const newProducts = [...products, product];
     setProducts(newProducts);
-    console.log(newProducts)
-    setTotalprice(product.price)
+    setTotalprice(prevTotal => prevTotal + product.price);
 };
 
 
