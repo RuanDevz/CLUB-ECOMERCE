@@ -50,8 +50,8 @@ export default function App() {
 
   return (
     <div  onClick={handlemodal} id='modalcart' className="flex justify-end items-center flex-row-reverse relative">
-      <div className="absolute right-0 mr-10 flex flex-row-reverse mt-2">
-          <FaCartShopping onClick={handlecartitem} className="text-white z-50 text-xl lg:text-2xl absolute mr-10 cursor-pointer"/>
+      <div className="flex flex-row-reverse mt-2 mr-5">
+          <FaCartShopping onClick={handlecartitem} className="text-white z-50 text-xl lg:text-2xl absolute mr-6 cursor-pointer"/>
         <span className="text-base text-white z-50">{quantity}</span>
       </div>
        <Navbar className="bg-dark">
